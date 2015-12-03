@@ -782,6 +782,16 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        globalMatch = matches[indexPath.row]
+        
+        var matchViewController: UIViewController!
+        
+        matchViewController = storyboard!.instantiateViewControllerWithIdentifier("MatchViewController") as! MatchViewController
+        matchViewController = UINavigationController(rootViewController: matchViewController)
+        self.slideMenuController()?.changeMainViewController(matchViewController, close: true)
+    }
+    
     /*
     // MARK: - Navigation
     
