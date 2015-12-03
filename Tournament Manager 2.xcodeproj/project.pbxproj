@@ -184,6 +184,11 @@
 					2963CBDB1BEF94090084AF47 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 853RXKH2S7;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

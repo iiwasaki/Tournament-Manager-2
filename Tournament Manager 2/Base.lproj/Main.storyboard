@@ -732,6 +732,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="AssignOutlet" destination="JUv-3Z-PyO" id="tu1-da-SF4"/>
                         <outlet property="DQPlayerTwo" destination="Azp-hX-Lne" id="jnV-RY-eOa"/>
                         <outlet property="DisplayScorePTwoUpdate" destination="Ju2-cU-931" id="pay-SL-1su"/>
                         <outlet property="P1Label1" destination="erv-Tf-7CZ" id="D12-Qj-Lss"/>
@@ -742,7 +743,9 @@
                         <outlet property="P2Score" destination="d4n-0Y-yT1" id="x1v-5x-fLt"/>
                         <outlet property="PlayerOneScoreSelection" destination="qSS-Dw-Uz5" id="KSG-yW-CpX"/>
                         <outlet property="PlayerTwoScoreSelection" destination="Ju2-cU-931" id="TQP-fF-7Qz"/>
+                        <outlet property="StationName" destination="g2k-I0-U7J" id="HAE-72-6Y5"/>
                         <outlet property="SubmitResults" destination="8hL-CL-ZDk" id="x77-QN-xe7"/>
+                        <outlet property="Timer" destination="eGF-m9-p4P" id="FVs-4R-xVw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jUH-Ha-wWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -762,12 +765,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bTD-ea-qsP">
-                                <rect key="frame" x="0.0" y="151" width="375" height="516"/>
+                                <rect key="frame" x="0.0" y="181" width="375" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="gyT-DB-OXx">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gyT-DB-OXx" id="I0S-2r-XCT">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="jId-jP-9SD" id="gGr-rb-Lim"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Station to Assign" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5H-yB-8yu">
+                                <rect key="frame" x="73" y="62" width="228" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1Y-Ch-ey8">
                                 <rect key="frame" x="119" y="100" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
@@ -782,12 +801,20 @@
                                     <action selector="AssignStation:" destination="jId-jP-9SD" eventType="touchUpInside" id="Kbn-Z1-dFl"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Station to Assign" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5H-yB-8yu">
-                                <rect key="frame" x="73" y="62" width="228" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qU4-Na-rhx">
+                                <rect key="frame" x="60" y="143" width="41" height="30"/>
+                                <state key="normal" title="Name"/>
+                                <connections>
+                                    <action selector="NameSort:" destination="jId-jP-9SD" eventType="touchUpInside" id="6xm-uR-9aV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8F-c0-RKb">
+                                <rect key="frame" x="287" y="143" width="44" height="30"/>
+                                <state key="normal" title="Status"/>
+                                <connections>
+                                    <action selector="StatusSort:" destination="jId-jP-9SD" eventType="touchUpInside" id="gzo-8p-Sw8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -797,6 +824,8 @@
                         <outlet property="AssignStation" destination="yL3-AG-qJl" id="7Ea-Vh-6JZ"/>
                         <outlet property="AssignStationLabel" destination="y5H-yB-8yu" id="RcI-4H-tP3"/>
                         <outlet property="AssignStationTable" destination="bTD-ea-qsP" id="dWd-L2-Qcp"/>
+                        <outlet property="NameSort" destination="qU4-Na-rhx" id="vYY-9n-OoP"/>
+                        <outlet property="StatusSort" destination="V8F-c0-RKb" id="rCd-Cb-0em"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uAr-wr-NEn" userLabel="First Responder" sceneMemberID="firstResponder"/>

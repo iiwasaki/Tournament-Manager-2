@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F1021" minimumToolsVersion="Automatic">
     <entity name="Bracket" representedClassName=".Bracket" syncable="YES">
         <attribute name="active" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="bracketType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -15,7 +15,7 @@
     </entity>
     <entity name="Match" representedClassName=".Match" syncable="YES">
         <attribute name="hasBye" optional="YES" attributeType="Integer 16" syncable="YES"/>
-        <attribute name="inProgress" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="inProgress" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="lastMatch" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="matchNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="score_player1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>

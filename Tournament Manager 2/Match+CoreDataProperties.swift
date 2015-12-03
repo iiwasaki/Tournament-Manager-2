@@ -26,4 +26,5 @@ extension Match {
     @NSManaged var hasBye: NSNumber?
     // has bye: 0 means 
     @NSManaged var matchNumber: NSNumber? //the number for the match
+    @NSManaged var current_station: Station?
 }

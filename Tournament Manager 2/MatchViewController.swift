@@ -32,8 +32,11 @@ class MatchViewController: UIViewController {
     @IBAction func DisplayScorePTwoUpdate(sender: UISegmentedControl) {
     }
     
-    //Button to Assign the Station
+    //Button/Labels to Assign the Station
     
+    @IBOutlet weak var AssignOutlet: UIButton!
+    @IBOutlet weak var StationName: UILabel!
+    @IBOutlet weak var StationTimer: UILabel!
     
     
     
@@ -51,8 +54,30 @@ class MatchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        AssignButtonCheck()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        <#code#>
+    }
+    
+    func AssignButtonCheck() {
+        if (globalMatch?.current_station == nil){
+            AssignOutlet.setTitle("Assign Station", forState: .Normal)
+            StationName.text = ""
+            StationTimer.text = ""
+            
+        }
+        
+        else if (globalMatch?.current_station != nil){
+            AssignOutlet.setTitle("Assigned Station", forState: .Normal)
+            StationName.text = "\(globalMatch?.current_station?.name)"
+            
+            //insert code for timer display
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
