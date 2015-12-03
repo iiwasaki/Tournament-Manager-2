@@ -611,7 +611,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hL-CL-ZDk">
-                                <rect key="frame" x="160" y="595" width="95" height="30"/>
+                                <rect key="frame" x="140" y="603" width="95" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Submit Result"/>
                                 <connections>
@@ -652,15 +652,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FQ-6p-ND9">
-                                <rect key="frame" x="178" y="204" width="57" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FQ-6p-ND9">
+                                <rect key="frame" x="181" y="204" width="54" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4n-0Y-yT1">
-                                <rect key="frame" x="178" y="247" width="59" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4n-0Y-yT1">
+                                <rect key="frame" x="183" y="247" width="54" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -725,6 +725,19 @@
                                     <action selector="DisplayScorePTwoUpdate:" destination="dsq-aL-MSU" eventType="valueChanged" id="Xlh-cd-mjk"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbk-JW-Fnm">
+                                <rect key="frame" x="157" y="565" width="62" height="30"/>
+                                <state key="normal" title="Clear DQ"/>
+                                <connections>
+                                    <action selector="ClearDQ:" destination="dsq-aL-MSU" eventType="touchUpInside" id="tcs-6Z-vuo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wqk-69-u7c">
+                                <rect key="frame" x="167" y="536" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -734,6 +747,7 @@
                         <outlet property="AssignOutlet" destination="JUv-3Z-PyO" id="tu1-da-SF4"/>
                         <outlet property="DQPlayerTwo" destination="Azp-hX-Lne" id="jnV-RY-eOa"/>
                         <outlet property="DisplayScorePTwoUpdate" destination="Ju2-cU-931" id="pay-SL-1su"/>
+                        <outlet property="MessageLabel" destination="Wqk-69-u7c" id="fPd-JJ-3jm"/>
                         <outlet property="P1Label1" destination="erv-Tf-7CZ" id="D12-Qj-Lss"/>
                         <outlet property="P1Label2" destination="LWf-Lz-X3v" id="nfe-Wd-nin"/>
                         <outlet property="P1Score" destination="1FQ-6p-ND9" id="LVF-fO-538"/>
@@ -743,8 +757,8 @@
                         <outlet property="PlayerOneScoreSelection" destination="qSS-Dw-Uz5" id="KSG-yW-CpX"/>
                         <outlet property="PlayerTwoScoreSelection" destination="Ju2-cU-931" id="TQP-fF-7Qz"/>
                         <outlet property="StationName" destination="g2k-I0-U7J" id="HAE-72-6Y5"/>
+                        <outlet property="StationTimer" destination="eGF-m9-p4P" id="LNY-eO-bcp"/>
                         <outlet property="SubmitResults" destination="8hL-CL-ZDk" id="x77-QN-xe7"/>
-                        <outlet property="Timer" destination="eGF-m9-p4P" id="FVs-4R-xVw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jUH-Ha-wWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -829,7 +843,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uAr-wr-NEn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1423.5" y="1867.5"/>
+            <point key="canvasLocation" x="1501.5" y="1808.5"/>
         </scene>
         <!--Bracket View Controller-->
         <scene sceneID="m6b-nc-MfN">

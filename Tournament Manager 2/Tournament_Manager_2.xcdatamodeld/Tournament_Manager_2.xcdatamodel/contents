@@ -18,6 +18,7 @@
         <attribute name="inProgress" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="lastMatch" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="matchNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="playerDQ" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="score_player1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="score_player2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="current_station" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Station" inverseName="current_match" inverseEntity="Station" syncable="YES"/>
@@ -43,7 +44,7 @@
     </entity>
     <elements>
         <element name="Bracket" positionX="-63" positionY="-18" width="128" height="210"/>
-        <element name="Match" positionX="225" positionY="-18" width="128" height="225"/>
+        <element name="Match" positionX="225" positionY="-18" width="128" height="240"/>
         <element name="Participant" positionX="115" positionY="-171" width="128" height="118"/>
         <element name="Station" positionX="142" positionY="171" width="128" height="120"/>
     </elements>

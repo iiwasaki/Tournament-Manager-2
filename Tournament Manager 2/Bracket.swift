@@ -33,6 +33,7 @@ class Bracket: NSManagedObject {
                 createdMatch.player2 = nil
                 createdMatch.hasBye = 0 //assume all are un-byed at this point
                 createdMatch.matchNumber = index
+                createdMatch.playerDQ = 0
                 
                 createdMatch.next_loser = nil
                 
