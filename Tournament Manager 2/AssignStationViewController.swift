@@ -69,8 +69,17 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         navigationItem.title = "Assign Match to a Station"
-        let backButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "backButton")
-        navigationItem.leftBarButtonItem = backButton
+        
+        if (globalMatch?.current_station == nil){
+            let backButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "backButton")
+            navigationItem.leftBarButtonItem = backButton
+        }
+        else {
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "backButton")
+            navigationItem.leftBarButtonItem = backButton
+        }
+        
+        
         AssignStationLabel.text = "Select Station to Assign"
     }
     

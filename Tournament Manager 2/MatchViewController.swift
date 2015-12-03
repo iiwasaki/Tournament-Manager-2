@@ -55,12 +55,30 @@ class MatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         AssignButtonCheck()
-
+        self.setNavigationBarItem()
+        navigationItem.title = ""
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
-        <#code#>
+        super.viewWillAppear(animated)
+        self.setNavigationBarItem()
+        navigationItem.title = "\(globalMatch?.player1?.name) vs \(globalMatch?.player2?.name)"
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "backButton")
+        navigationItem.leftBarButtonItem = backButton
+        
+        AssignButtonCheck()
+        
+        
+        
+    }
+    
+    func backButton(){
+        var bracketViewController: UIViewController!
+        
+        bracketViewController = storyboard!.instantiateViewControllerWithIdentifier("BracketViewController") as! BracketViewController
+        bracketViewController = UINavigationController(rootViewController: bracketViewController)
+        self.slideMenuController()?.changeMainViewController(bracketViewController, close: true)
     }
     
     func AssignButtonCheck() {

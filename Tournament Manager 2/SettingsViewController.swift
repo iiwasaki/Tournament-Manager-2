@@ -24,6 +24,7 @@ class SettingsViewController: UIViewController {
             UpdateLabel.text = "Timer Updated!"
         }
     }
+
     
     @IBOutlet weak var AscendOrDescend: UISegmentedControl!
     

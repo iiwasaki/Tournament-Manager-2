@@ -159,7 +159,7 @@
                                 <animations/>
                                 <state key="normal" title="Update"/>
                                 <connections>
-                                    <action selector="UpdateTimer:" destination="QUm-mW-FzY" eventType="touchUpInside" id="GC4-J7-Jf4"/>
+                                    <action selector="UpdateTimer:" destination="QUm-mW-FzY" eventType="touchUpInside" id="Pae-Q6-Ma3"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3hy-oU-XPR">
@@ -224,7 +224,6 @@
                         <outlet property="DefTimer" destination="3hy-oU-XPR" id="IqF-Gq-OeK"/>
                         <outlet property="SortingMethod" destination="k9Q-fo-FY8" id="2ut-MJ-kkL"/>
                         <outlet property="UpdateLabel" destination="z9u-Gn-AnC" id="0h3-LP-J6z"/>
-                        <outlet property="UpdateTimer" destination="mWg-Kh-119" id="252-vT-ghp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BkD-c8-RGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
