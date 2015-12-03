@@ -101,23 +101,26 @@ class Match: NSManagedObject {
                 let additiveFactor = 62-mult
                 next_loser = matches[Int(matchNumber!) + additiveFactor]
             }
-            else if (Int(matchNumber!) >= 48 && Int(matchNumber!) <= 55){
+            else if (Int(matchNumber!) >= 48 && Int(matchNumber!) <= 51){
                 let temp = Int(matchNumber!)-48
                 let mult = temp * 2
-                let additiveFactor = 62-mult
+                let additiveFactor = 58-mult
                 next_loser = matches[Int(matchNumber!) + additiveFactor]
             }
-            else if (Int(matchNumber!) >= 56 && Int(matchNumber!) <= 59){
-                let temp = Int(matchNumber!)-56
+            else if (Int(matchNumber!) >= 52 && Int(matchNumber!) <= 55){
+                let temp = Int(matchNumber!)-52
                 let mult = temp * 2
-                let additiveFactor = 62-mult
+                let additiveFactor = 58-mult
                 next_loser = matches[Int(matchNumber!) + additiveFactor]
+            }
+            else if (Int(matchNumber!) >= 56 && Int(matchNumber!) <= 57){
+                next_loser = matches[Int(matchNumber!) + 61]
+            }
+            else if (Int(matchNumber!) >= 58 && Int(matchNumber!) <= 59){
+                next_loser = matches[Int(matchNumber!) + 57]
             }
             else if (Int(matchNumber!) >= 60 && Int(matchNumber!) <= 61){
-                let temp = Int(matchNumber!)-60
-                let mult = temp * 2
-                let additiveFactor = 62-mult
-                next_loser = matches[Int(matchNumber!) + additiveFactor]
+                next_loser = matches[Int(matchNumber!) + 61]
             }
             else if (Int(matchNumber!) == 62){
                 next_loser = matches[124]
@@ -132,108 +135,92 @@ class Match: NSManagedObject {
         }
     }
     
-    func advanceWinner(){
+    func advanceWinnersInitial(){
         if (hasBye == 1){
             //P1 is a BYE 
             if Int(matchNumber!) < 63 {
                 if(Int(matchNumber!)%2 == 0){
                     next_winner?.player1 = player2
                     next_winner?.refreshByes()
-                    next_loser?.refreshByes()
+                    next_loser?.hasBye = Int((next_loser?.hasBye)!) + 1
                 }
                 else {
                     next_winner?.player2 = player2
                     next_winner?.refreshByes()
-                   /*
-                    if(next_loser?.hasBye == 0){
-                        next_loser?.hasBye = 2
-                    }
-                    else{
-                        next_loser?.hasBye = 3
-                    }
-                    */
-                    next_loser?.refreshByes()
+                    next_loser?.hasBye = Int((next_loser?.hasBye)!) + 2
                 }
             }
             else if (Int(matchNumber!) >= 63 && Int(matchNumber!) <= 78){
-                next_winner?.player1 = player2
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
             }
             else if (Int(matchNumber!) >= 79 && Int(matchNumber!) <= 94){
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player2
-                    next_winner?.refreshByes()
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
                 }
                 else{
                     next_winner?.player2 = player2
-                    next_winner?.refreshByes()
-
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
                 }
             }
             else if (Int(matchNumber!) >= 95 && Int(matchNumber!) <= 102){
-                next_winner?.player1 = player2
-                next_winner?.refreshByes()
-
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
             }
             else if (Int(matchNumber!) >= 103 && Int(matchNumber!) <= 110){
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player2
-                    next_winner?.refreshByes()
-
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
                 }
                 else{
                     next_winner?.player2 = player2
-                    next_winner?.refreshByes()
-
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
                 }
             }
             else if (Int(matchNumber!) >= 111 && Int(matchNumber!) <= 114){
                 next_winner?.player1 = player2
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
             }
             else if (Int(matchNumber!) >= 115 && Int(matchNumber!) <= 118) {
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player2
-                    next_winner?.refreshByes()
-
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
                 }
                 else{
                     next_winner?.player2 = player2
-                    next_winner?.refreshByes()
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
                 }
             }
             else if (Int(matchNumber!) >= 119 && Int(matchNumber!) <= 120){
                 next_winner?.player1 = player2
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
             }
             else if (Int(matchNumber!) == 121){
                 next_winner?.player1 = player2
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
             }
             else if (Int(matchNumber!) == 122){
                 next_winner?.player2 = player2
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
             }
             else if (Int(matchNumber!) == 123){
                 next_winner?.player1 = player2
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
             }
             else if (Int(matchNumber!) == 124){
                 next_winner?.player2 = player2
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
             }
             else if (Int(matchNumber!) == 125){
                 next_winner?.player2 = player2
-                next_winner?.refreshByes()
-
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
             }
             else {
                 print("Error resolving bye 1")
@@ -245,93 +232,91 @@ class Match: NSManagedObject {
                 if(Int(matchNumber!)%2 == 0){
                     next_winner?.player1 = player1
                     next_winner?.refreshByes()
-                    next_loser?.refreshByes()
+                    next_loser?.hasBye = Int((next_loser?.hasBye)!) + 1
                 }
                 else {
                     next_winner?.player2 = player1
                     next_winner?.refreshByes()
-                    next_loser?.refreshByes()
+                    next_loser?.hasBye = Int((next_loser?.hasBye)!) + 2
                 }
                 
             }
             else if (Int(matchNumber!) >= 63 && Int(matchNumber!) <= 78){
                 next_winner?.player1 = player1
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
             }
             else if (Int(matchNumber!) >= 79 && Int(matchNumber!) <= 94){
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player1
-                    next_winner?.refreshByes()
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
                 }
                 else{
                     next_winner?.player2 = player1
-                    next_winner?.refreshByes()
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
                 }
             }
             else if (Int(matchNumber!) >= 95 && Int(matchNumber!) <= 102){
                 next_winner?.player1 = player1
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
             }
             else if (Int(matchNumber!) >= 103 && Int(matchNumber!) <= 110){
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player1
-                    next_winner?.refreshByes()
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
                 }
                 else{
                     next_winner?.player2 = player1
-                    next_winner?.refreshByes()
-
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
                 }
             }
             else if (Int(matchNumber!) >= 111 && Int(matchNumber!) <= 114){
                 next_winner?.player1 = player1
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
             }
             else if (Int(matchNumber!) >= 115 && Int(matchNumber!) <= 118) {
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player1
-                    next_winner?.refreshByes()
-
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
                 }
                 else{
                     next_winner?.player2 = player1
-                    next_winner?.refreshByes()
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
                 }
             }
             else if (Int(matchNumber!) >= 119 && Int(matchNumber!) <= 120){
                 next_winner?.player1 = player1
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
             }
             else if (Int(matchNumber!) == 121){
                 next_winner?.player1 = player1
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
             }
             else if (Int(matchNumber!) == 122){
                 next_winner?.player2 = player1
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
             }
             else if (Int(matchNumber!) == 123){
                 next_winner?.player1 = player1
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
             }
             else if (Int(matchNumber!) == 124){
                 next_winner?.player2 = player1
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
             }
             else if (Int(matchNumber!) == 125){
                 next_winner?.player2 = player1
-                next_winner?.refreshByes()
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
             }
             else {
@@ -344,95 +329,117 @@ class Match: NSManagedObject {
                 if(Int(matchNumber!)%2 == 0){
                     next_winner?.player1 = nil
                     next_winner?.refreshByes()
+                    //next_loser?.hasBye = Int((next_loser?.hasBye)!) + 2
+
                 }
                 else {
                     next_winner?.player2 = nil
                     next_winner?.refreshByes()
+                    //next_loser?.hasBye = Int((next_loser?.hasBye)!) + 2
                 }
             }
             else if (Int(matchNumber!) >= 63 && Int(matchNumber!) <= 78){
                 next_winner?.player1 = nil
-                next_winner?.refreshByes()
+                //next_winner?.hasBye = Int((next_winner?.hasBye)!) + 1
             }
             else if (Int(matchNumber!) >= 79 && Int(matchNumber!) <= 94){
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = nil
-                    next_winner?.refreshByes()
+                   // next_winner?.hasBye = Int((next_winner?.hasBye)!) + 1
 
                 }
                 else{
                     next_winner?.player2 = nil
-                    next_winner?.refreshByes()
+                   // next_winner?.hasBye = Int((next_winner?.hasBye)!) + 2
 
                 }
             }
             else if (Int(matchNumber!) >= 95 && Int(matchNumber!) <= 102){
                 next_winner?.player1 = nil
-                next_winner?.refreshByes()
+               // next_winner?.hasBye = Int((next_winner?.hasBye)!) + 1
 
             }
             else if (Int(matchNumber!) >= 103 && Int(matchNumber!) <= 110){
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = nil
-                    next_winner?.refreshByes()
+                 //   next_winner?.hasBye = Int((next_winner?.hasBye)!) + 1
 
                 }
                 else{
                     next_winner?.player2 = nil
-                    next_winner?.refreshByes()
+                //    next_winner?.hasBye = Int((next_winner?.hasBye)!) + 2
 
                 }
             }
             else if (Int(matchNumber!) >= 111 && Int(matchNumber!) <= 114){
                 next_winner?.player1 = nil
-                next_winner?.refreshByes()
+             //   next_winner?.hasBye = Int((next_winner?.hasBye)!) + 1
 
             }
             else if (Int(matchNumber!) >= 115 && Int(matchNumber!) <= 118) {
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = nil
-                    next_winner?.refreshByes()
+              //      next_winner?.hasBye = Int((next_winner?.hasBye)!) + 1
 
                 }
                 else{
                     next_winner?.player2 = nil
-                    next_winner?.refreshByes()
+              //      next_winner?.hasBye = Int((next_winner?.hasBye)!) + 2
 
                 }
             }
             else if (Int(matchNumber!) >= 119 && Int(matchNumber!) <= 120){
                 next_winner?.player1 = nil
-                next_winner?.refreshByes()
+             //   next_winner?.hasBye = Int((next_winner?.hasBye)!) + 1
 
             }
             else if (Int(matchNumber!) == 121){
                 next_winner?.player1 = nil
-                next_winner?.refreshByes()
+          //      next_winner?.hasBye = Int((next_winner?.hasBye)!) + 1
 
             }
             else if (Int(matchNumber!) == 122){
                 next_winner?.player2 = nil
-                next_winner?.refreshByes()
+        //        next_winner?.hasBye = Int((next_winner?.hasBye)!) + 2
 
             }
             else if (Int(matchNumber!) == 123){
                 next_winner?.player1 = nil
-                next_winner?.refreshByes()
+        //        next_winner?.hasBye = Int((next_winner?.hasBye)!) + 1
 
             }
             else if (Int(matchNumber!) == 124){
                 next_winner?.player2 = nil
-                next_winner?.refreshByes()
+        //        next_winner?.hasBye = Int((next_winner?.hasBye)!) + 2
 
             }
             else if (Int(matchNumber!) == 125){
                 next_winner?.player2 = nil
-                next_winner?.refreshByes()
+       //         next_winner?.hasBye = Int((next_winner?.hasBye)!) + 2
 
+            }
+            else if (Int(matchNumber!) == 126){
+                
             }
             else {
                 print("Error resolving bye 1")
             }
+        }
+        else{
+            if Int(matchNumber!) < 63 {
+                if(Int(matchNumber!)%2 == 0){
+                    next_winner?.hasBye = 0
+                    next_loser?.hasBye = Int((next_loser?.hasBye)!) - 1
+                }
+                else {
+                    next_winner?.hasBye = 0
+                    next_loser?.hasBye = Int((next_loser?.hasBye)!) - 1
+                }
+            }
+            else {
+                
+            }
+
         }
     }
     

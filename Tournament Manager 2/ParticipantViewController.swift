@@ -124,6 +124,10 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
                 competitors[i].seed = Int(competitors[i].seed!)-1
             }
             competitors.removeAtIndex(selectedParticipant!)
+            resetMatches()
+            for player in competitors{
+                placePlayerInMatch(Int(player.seed!), player: player)
+            }
             currentBracket?.numParts = competitors.count
             assignType()
             do {
@@ -155,6 +159,7 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
             competitors[selectedParticipant!-1].seed = Int(competitors[selectedParticipant!-1].seed!)+1
             swap(&competitors[selectedParticipant!], &competitors[selectedParticipant!-1])
             
+            resetMatches()
             //replace in matches
             placePlayerInMatch(Int(competitors[selectedParticipant!].seed!), player: competitors[selectedParticipant!])
             placePlayerInMatch(Int(competitors[selectedParticipant!-1].seed!), player: competitors[selectedParticipant!-1])
@@ -188,6 +193,7 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
             competitors[selectedParticipant!+1].seed = Int(competitors[selectedParticipant!+1].seed!)-1
             swap(&competitors[selectedParticipant!], &competitors[selectedParticipant!+1])
             
+            resetMatches()
             //replace in matches
             placePlayerInMatch(Int(competitors[selectedParticipant!].seed!), player: competitors[selectedParticipant!])
             placePlayerInMatch(Int(competitors[selectedParticipant!+1].seed!), player: competitors[selectedParticipant!+1])
@@ -458,6 +464,13 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
             else {
                 currentBracket?.bracketType = 9
             }
+        }
+    }
+    
+    func resetMatches(){
+        for eachMatch in matches{
+            eachMatch.player1 = nil
+            eachMatch.player2 = nil
         }
     }
     /*

@@ -51,13 +51,20 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
         print (matches.count)
         assignInitialByes()
         createRounds()
+        print ("matches")
+        print(matches[60].hasBye!)
+        print(matches[61].hasBye!)
+       // print(matches[121].hasBye!)
+       // print(matches[122].hasBye!)
+       // print(matches[123].hasBye!)
+       // print(matches[124].hasBye!)
+       // print(matches[125].hasBye!)
+       // print(matches[126].hasBye!)
+        //print(matches[115].hasBye!)
+        //print(matches[119].hasBye!)
+
+
         tableView.reloadData()
-        print(matches[62].player1)
-        print(matches[16])
-        print(matches[24])
-        print(matches[58])
-        print(matches[59])
-        print(matches[61])
         errorLabel.text = ""
         self.setNavigationBarItem()
         navigationItem.title = "Your Brackets"
@@ -144,6 +151,62 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
                 return wFinalRound.count
             }
         }
+        else if currentBracket?.bracketType == 1{
+            //4 Player DE
+            if section == 0{
+                return wSemiRound.count
+            }
+            if section == 1{
+                return wFinalRound.count
+            }
+            if section == 2{
+                return lSemiRound.count
+            }
+            if section == 3 {
+                return lFinalRound.count
+            }
+            if section == 4{
+                return grandFinalsRound.count
+            }
+        }
+        else if currentBracket?.bracketType == 2{
+            if section == 0 {
+                return wQuarterRound.count
+            }
+            if section == 1{
+                return wSemiRound.count
+            }
+            if section == 2{
+                return wFinalRound.count
+            }
+        }
+        else if currentBracket?.bracketType == 3{
+            //8 Player DE
+            if section == 0 {
+                return wQuarterRound.count
+            }
+            if section == 1 {
+                return l7thRound.count
+            }
+            if section == 2 {
+                return lQuarterRound.count
+            }
+            if section == 3{
+                return wSemiRound.count
+            }
+            if section == 4{
+                return wFinalRound.count
+            }
+            if section == 5{
+                return lSemiRound.count
+            }
+            if section == 6 {
+                return lFinalRound.count
+            }
+            if section == 7{
+                return grandFinalsRound.count
+            }
+        }
         else{
             return 3
         }
@@ -158,13 +221,13 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
             return 2 //4-person, SE
         }
         else if currentBracket?.bracketType == 1{
-            return 3 //4-person, DE
+            return 5 //4-person, DE
         }
         else if currentBracket?.bracketType == 2{
             return 3 //8-person, SE
         }
         else if currentBracket?.bracketType == 3{
-            return 5 //8-person, DE
+            return 8 //8-person, DE
         }
         else if currentBracket?.bracketType == 4{
             return 4 //16-person, SE
@@ -203,6 +266,78 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.textLabel!.text = getCellText(thisMatch)
             }
         }
+        else if currentBracket?.bracketType == 1 {
+            //4 person DE
+            if indexPath.section == 0 {
+                let thisMatch = wSemiRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 1{
+                let thisMatch = wFinalRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 2{
+                let thisMatch = lSemiRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 3{
+                let thisMatch = lFinalRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 4{
+                let thisMatch = grandFinalsRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+        }
+        else if currentBracket?.bracketType == 2{
+            if indexPath.section == 0 {
+                let thisMatch = wQuarterRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 1 {
+                let thisMatch = wSemiRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 2{
+                let thisMatch = wFinalRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+        }
+        else if currentBracket?.bracketType == 3 {
+            //8 person DE
+            if indexPath.section == 0{
+                let thisMatch = wQuarterRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 1{
+                let thisMatch = l7thRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 2{
+                let thisMatch = lQuarterRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 3 {
+                let thisMatch = wSemiRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 4{
+                let thisMatch = wFinalRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 5{
+                let thisMatch = lSemiRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 6{
+                let thisMatch = lFinalRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+            else if indexPath.section == 7{
+                let thisMatch = grandFinalsRound[indexPath.row]
+                cell.textLabel!.text = getCellText(thisMatch)
+            }
+        }
             
         else {
                 cell.textLabel!.text = "Test"
@@ -232,7 +367,11 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
             case 1:
                 return "Finals"
             case 2:
-                return "Loser Finals"
+                return "Loser's Semis"
+            case 3:
+                return "Loser's Finals"
+            case 4:
+                return "Grand Finals"
             default:
                 return "Error"
             }
@@ -254,13 +393,19 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
             case 0:
                 return "Quarter-Finals"
             case 1:
-                return "Semi-Finals"
+                return "Loser First Round"
             case 2:
-                return "Finals"
+                return "Loser Quarter-Finals"
             case 3:
-                return "Loser Semi-Finals"
+                return "Semi-Finals"
             case 4:
-                return "Loser Finals"
+                return "Finals"
+            case 5:
+                return "Loser's Semis"
+            case 6:
+                return "Loser's Finals"
+            case 7:
+                return "Grand Finals"
             default:
                 return "Error"
             }
@@ -406,7 +551,7 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
                 matches[range].player2 = nil
             }
         }
-        if currentBracket?.bracketType == 0 {
+        if currentBracket?.singleElim == true  {
             //4-person, single-elim: resolve up to winner's semis 
             for index in 0...31{
                 if matches[index].player1 == nil && matches[index].player2 == nil{
@@ -427,9 +572,78 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
             for index in 0...61 {
-                matches[index].advanceWinner()
+                matches[index].advanceWinnersInitial()
             }
         }
+        else {
+            if currentBracket?.bracketType == 1{
+                //4-player DE
+                for index in 0...31{
+                    if matches[index].player1 == nil && matches[index].player2 == nil{
+                        //both are BYES
+                        matches[index].hasBye = 3
+                    }
+                    else if matches[index].player1 == nil && matches[index].player2 != nil {
+                        //Player 1 is a BYE
+                        matches[index].hasBye = 1
+                    }
+                    else if matches[index].player2 == nil && matches[index].player1 != nil{
+                        //Player 2 is a BYE
+                        matches[index].hasBye = 2
+                    }
+                    else {
+                        //No byes
+                        matches[index].hasBye = 0
+                    }
+                }
+                for index in 121...122{
+                    matches[index].hasBye = 2
+                }
+                matches[123].hasBye = 3
+                for index in 0...61 {
+                    matches[index].advanceWinnersInitial()
+                }
+                for index in 121...122{
+                    matches[index].advanceWinnersInitial()
+                }
+                
+            }
+            else if currentBracket?.bracketType == 3{
+                //8-player DE
+                for index in 0...31{
+                    if matches[index].player1 == nil && matches[index].player2 == nil{
+                        //both are BYES
+                        matches[index].hasBye = 3
+                    }
+                    else if matches[index].player1 == nil && matches[index].player2 != nil {
+                        //Player 1 is a BYE
+                        matches[index].hasBye = 1
+                    }
+                    else if matches[index].player2 == nil && matches[index].player1 != nil{
+                        //Player 2 is a BYE
+                        matches[index].hasBye = 2
+                    }
+                    else {
+                        //No byes
+                        matches[index].hasBye = 0
+                    }
+                }
+                for index in 115...118{
+                    matches[index].hasBye = 2
+                }
+                for index in 119...123{
+                    matches[index].hasBye = 3
+                }
+                for index in 0...61 {
+                    matches[index].advanceWinnersInitial()
+                }
+                for index in 115...120{
+                    matches[index].advanceWinnersInitial()
+                }
+                
+            }
+        }
+
         do {
             try managedContext.save()
         } catch let error as NSError {
@@ -451,6 +665,74 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             wFinalRound.append(matches[62])
         }
+        else if currentBracket?.bracketType == 1{
+            //4-person DE 
+            for index in 60...61{
+                if matches[index].hasBye == 0{
+                    wSemiRound.append(matches[index])
+                }
+                else {
+                    //do nothing
+                }
+            }
+            wFinalRound.append(matches[62])
+            if matches[123].hasBye == 0{
+                lSemiRound.append(matches[123])
+            }
+            lFinalRound.append(matches[124])
+            grandFinalsRound.append(matches[125])
+            grandFinalsRound.append(matches[126])
+        }
+        else if currentBracket?.bracketType == 2{
+            //8-person SE 
+            for index in 56...59{
+                if matches[index].hasBye == 0{
+                    wQuarterRound.append(matches[index])
+                }
+            }
+            for index in 60...61{
+                if matches[index].hasBye == 0{
+                    wSemiRound.append(matches[index])
+                }
+                else{
+                    //do nothing
+                }
+            }
+            wFinalRound.append(matches[62])
+        }
+        else if currentBracket?.bracketType == 3{
+            //8-person DE
+            for index in 56...59{
+                if matches[index].hasBye == 0{
+                    wQuarterRound.append(matches[index])
+                }
+            }
+            for index in 60...61{
+                if matches[index].hasBye == 0{
+                    wSemiRound.append(matches[index])
+                }
+                else {
+                    //do nothing
+                }
+            }
+            for index in 119...120{
+                if matches[index].hasBye == 0 {
+                    l7thRound.append(matches[index])
+                }
+            }
+            for index in 121...122{
+                if matches[index].hasBye == 0{
+                    lQuarterRound.append(matches[index])
+                }
+            }
+            wFinalRound.append(matches[62])
+            if matches[123].hasBye == 0{
+                lSemiRound.append(matches[123])
+            }
+            lFinalRound.append(matches[124])
+            grandFinalsRound.append(matches[125])
+            grandFinalsRound.append(matches[126])
+        }
     }
 
     func getCellText(thisMatch: Match) -> String{
@@ -470,7 +752,7 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
             p1seed = Int(thisMatch.player1!.seed!)
             return "\(p1seed!): \(p1name!) vs \(p2name!)"
         }
-        else if thisMatch.hasBye == 0{
+        else if thisMatch.hasBye! == 0{
             if thisMatch.player1 == nil && thisMatch.player2 == nil {
                 return "TBD vs TBD"
             }
@@ -495,7 +777,7 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         else{
-            return "Error"
+            return "Error asd"
         }
 
     }
