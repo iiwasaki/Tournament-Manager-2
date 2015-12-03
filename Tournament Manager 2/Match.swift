@@ -147,7 +147,7 @@ class Match: NSManagedObject {
                 else {
                     next_winner?.player2 = player2
                     next_winner?.refreshByes()
-                    next_loser?.hasBye = Int((next_loser?.hasBye)!) + 2
+                    next_loser?.hasBye = Int((next_loser?.hasBye)!) + 1
                 }
             }
             else if (Int(matchNumber!) >= 63 && Int(matchNumber!) <= 78){
@@ -156,12 +156,12 @@ class Match: NSManagedObject {
             else if (Int(matchNumber!) >= 79 && Int(matchNumber!) <= 94){
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player2
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
                 }
                 else{
                     next_winner?.player2 = player2
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
                 }
             }
             else if (Int(matchNumber!) >= 95 && Int(matchNumber!) <= 102){
@@ -170,11 +170,11 @@ class Match: NSManagedObject {
             else if (Int(matchNumber!) >= 103 && Int(matchNumber!) <= 110){
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player2
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
                 }
                 else{
                     next_winner?.player2 = player2
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
                 }
             }
             else if (Int(matchNumber!) >= 111 && Int(matchNumber!) <= 114){
@@ -185,11 +185,11 @@ class Match: NSManagedObject {
             else if (Int(matchNumber!) >= 115 && Int(matchNumber!) <= 118) {
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player2
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
                 }
                 else{
                     next_winner?.player2 = player2
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
                 }
             }
@@ -237,7 +237,7 @@ class Match: NSManagedObject {
                 else {
                     next_winner?.player2 = player1
                     next_winner?.refreshByes()
-                    next_loser?.hasBye = Int((next_loser?.hasBye)!) + 2
+                    next_loser?.hasBye = Int((next_loser?.hasBye)!) + 1
                 }
                 
             }
@@ -248,12 +248,12 @@ class Match: NSManagedObject {
             else if (Int(matchNumber!) >= 79 && Int(matchNumber!) <= 94){
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player1
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
                 }
                 else{
                     next_winner?.player2 = player1
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
                 }
             }
@@ -265,12 +265,12 @@ class Match: NSManagedObject {
             else if (Int(matchNumber!) >= 103 && Int(matchNumber!) <= 110){
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player1
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
 
                 }
                 else{
                     next_winner?.player2 = player1
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
                 }
             }
             else if (Int(matchNumber!) >= 111 && Int(matchNumber!) <= 114){
@@ -281,11 +281,11 @@ class Match: NSManagedObject {
             else if (Int(matchNumber!) >= 115 && Int(matchNumber!) <= 118) {
                 if(Int(matchNumber!)%2 == 1) {
                     next_winner?.player1 = player1
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
                 }
                 else{
                     next_winner?.player2 = player1
-                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 1
+                    next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
 
                 }
             }
@@ -436,8 +436,21 @@ class Match: NSManagedObject {
                     next_loser?.hasBye = Int((next_loser?.hasBye)!) - 1
                 }
             }
-            else {
-                
+            else if (Int(matchNumber!) >= 63 && Int(matchNumber!) <= 78){
+                next_winner?.player1 = nil
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
+            }
+            else if (Int(matchNumber!) >= 95 && Int(matchNumber!) <= 102){
+                next_winner?.player1 = nil
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
+            }
+            else if (Int(matchNumber!) >= 111 && Int(matchNumber!) <= 114){
+                next_winner?.player1 = nil
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
+            }
+            else if (Int(matchNumber!) >= 119 && Int(matchNumber!) <= 120){
+                next_winner?.player1 = nil
+                next_winner?.hasBye = Int((next_winner?.hasBye)!) - 2
             }
 
         }
