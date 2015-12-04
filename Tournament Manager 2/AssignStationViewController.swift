@@ -45,16 +45,42 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
         globalMatch?.current_station = stations[AssignSelectedStation!]
         stations[AssignSelectedStation!].filled = 1
         
+        //This checks that the user allowed the use of local notifications
+        guard let settings = UIApplication.sharedApplication().currentUserNotificationSettings() else { return }
+        
+        if settings.types == .None {
+            let ac = UIAlertController(title: "Can't assign station", message: "Notifications have not been approved", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
+        }
+        
+        else{
+        //This schedules the local notification
+            let notification = UILocalNotification()
+                notification.fireDate = NSDate(timeIntervalSinceNow: Double(stations[AssignSelectedStation!].time!))
+                notification.alertBody = "\(globalMatch!.parent_bracket!.name!) - \(globalMatch!.player1!.name!) vs \(globalMatch!.player2!.name!) should be reported!"
+                notification.alertAction = "to be done"
+                notification.soundName = UILocalNotificationDefaultSoundName
+                notification.userInfo = ["CustomField1": "Notification Received"]
+                UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        }
+    
         //insert code for timer
+        
+    }
+    
+    func Action(){
         
     }
     
     //buttons to sort the table by name or status of station
     
     @IBAction func NameSort(sender: UIButton) {
+        
     }
     
     @IBAction func StatusSort(sender: UIButton) {
+        
     }
     
     

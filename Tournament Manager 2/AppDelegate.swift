@@ -32,8 +32,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
         self.window?.rootViewController = slideMenuController
         self.window?.makeKeyAndVisible()
+        
+        // This opens the app from the notification and allows for a custom response
+        if let options = launchOptions {
+            if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+                if let userInfo = notification.userInfo {
+                    let customField1 = userInfo["CustomField1"] as! String
+                    // This is if you want to use this data
+                }
+            }
+        }
+        //This asks user for permission to use local notifications
+        let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+        
         return true
     }
+    
+    //This function allows a custom response if the local notification is receieved while the app is open
+     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        if let userInfo = notification.userInfo {
+            if ( application.applicationState == UIApplicationState.Active ){
+                //since a user cannot receive banner notifications while the app is active, an alert window is used which will popup where ever the user is in the application when a timer for a match goes off. From there they will be able to select their action. 
+                
+                //let TimerAlert = UIAlertController(title: "", message: <#T##String?#>, preferredStyle: .Alert)
+                let test = notification.alertBody
+                print (test)
+                
+                
+            }
+            
+            let customField1 = userInfo["CustomField1"] as! String
+            print("didReceiveLocalNotification: \(customField1)")
+        }
+    }
+    
+    //func application
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
