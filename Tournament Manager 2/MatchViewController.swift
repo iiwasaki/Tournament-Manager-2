@@ -227,12 +227,12 @@ class MatchViewController: UIViewController {
         
             do {
                 try managedContext.save()
+                MessageLabel.text = "Match results saved and submitted."
+                globalMatch?.current_station?.current_match = nil
             } catch let error as NSError {
                 print("Could not save \(error)")
             }
-            print (globalMatch)
-            print (globalMatch?.next_loser)
-            print (globalMatch?.next_loser?.next_winner)
+
         }
     }
     
@@ -253,6 +253,7 @@ class MatchViewController: UIViewController {
         P1Label1.text! = globalMatch!.player1!.name!
         P2Label1.text! = globalMatch!.player2!.name!
 
+        MessageLabel.text = ""
         
         AssignButtonCheck()
         LoadScores()

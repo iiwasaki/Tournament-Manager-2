@@ -21,6 +21,8 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var AssignStationLabel: UILabel!
     
     //buttons to clear the station and assign the station
+    @IBAction func setNotification(sender: AnyObject) {
+    }
     
     @IBAction func ClearStation(sender: UIButton) {
         
@@ -138,7 +140,7 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
         }
             
         else{
-            cell.textLabel?.text = "\(stationNameRow!) - In Progress - \(stationCMatch?.player1?.name!) vs \(stationCMatch?.player2?.name!) "
+            cell.textLabel?.text = "\(stationNameRow!) - In Progress - \(stationCMatch!.player1!.name!) vs \(stationCMatch!.player2!.name!) "
             return cell
         }
         
