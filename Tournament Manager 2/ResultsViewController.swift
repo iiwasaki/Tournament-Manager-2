@@ -20,10 +20,15 @@ class ResultsViewController: UIViewController, UITableViewDataSource {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
-        navigationItem.title = "Your Brackets"
         if (currentBracket == nil){
             navigationItem.title = "No Bracket Selected"
         }
+        else {
+            navigationItem.title = "\(currentBracket!.name!) Results"
+        }
+        
+        results.sortInPlace{Int($0.rank!) < Int($1.rank!)}
+        tableView.reloadData()
 
     }
 

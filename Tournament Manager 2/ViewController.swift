@@ -28,6 +28,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let index = defaults.objectForKey("selectedBracket"){
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            let fetchRequest = NSFetchRequest(entityName: "Bracket")
+            
+            do {
+                let results = try managedContext.executeFetchRequest(fetchRequest)
+                brackets = results as! [Bracket]
+                brackets.sortInPlace{$0.name!.lowercaseString < $1.name!.lowercaseString}
+                print("Fetched\n")
+            } catch let error as NSError {
+                print ("Could not fetch \(error), \(error.userInfo)")
+            }
+            currentBracket = brackets[Int(index as! NSNumber)]
+            competitors = currentBracket!.players?.allObjects as! [Participant]
+            matches = currentBracket!.matches?.allObjects as! [Match]
+            stations = currentBracket!.stations?.allObjects as! [Station]
+            competitors.sortInPlace{Int($0.seed!) < Int($1.seed!)}
+            results = currentBracket!.results?.allObjects as! [Participant]
+            matches.sortInPlace{Int($0.matchNumber!) < Int($1.matchNumber!)}
+        }
     }
     
     
@@ -90,6 +112,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         currentBracket = brackets[indexPath.row]
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(indexPath.row, forKey: "selectedBracket")
         competitors = currentBracket!.players?.allObjects as! [Participant]
         matches = currentBracket!.matches?.allObjects as! [Match]
         stations = currentBracket!.stations?.allObjects as! [Station]

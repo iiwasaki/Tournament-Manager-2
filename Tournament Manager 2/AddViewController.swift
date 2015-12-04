@@ -106,6 +106,7 @@ class AddViewController: UIViewController {
             competitors = currentBracket!.players?.allObjects as! [Participant]
             matches = currentBracket!.matches?.allObjects as! [Match]
             matches.sortInPlace{Int($0.matchNumber!) < Int($1.matchNumber!)}
+            results.removeAll()
             
             for eachMatch in matches{
                 eachMatch.assignWinner()

@@ -487,12 +487,19 @@ class Match: NSManagedObject {
                 winner.wins = Int(winner.wins!) + 1
                 loser.losses = Int(loser.losses!) + 1
                 currentBracket?.active = 2
+                assignRank(Int(matchNumber!), loser: loser)
+                loser.result_bracket = currentBracket
+                results.append(loser)
+                winner.rank = 1
+                winner.result_bracket = currentBracket
+                results.append(winner)
             }
             else{
                 if Int(matchNumber!)%2==0{
                     next_winner?.player1 = winner
                     winner.wins = Int(winner.wins!) + 1
                     loser.losses = Int(loser.losses!) + 1
+                    assignRank(Int(matchNumber!), loser: loser)
                     loser.result_bracket = currentBracket
                     results.append(loser)
                 }
@@ -500,6 +507,7 @@ class Match: NSManagedObject {
                     next_winner?.player2 = winner
                     winner.wins = Int(winner.wins!) + 1
                     loser.losses = Int(loser.losses!) + 1
+                    assignRank(Int(matchNumber!), loser: loser)
                     loser.result_bracket = currentBracket
                     results.append(loser)
                 }
@@ -513,8 +521,12 @@ class Match: NSManagedObject {
                 winner.wins = Int(winner.wins!) + 1
                 currentBracket?.active = 2
                 loser.losses = Int(loser.losses!) + 1
+                assignRank(Int(matchNumber!), loser: loser)
                 loser.result_bracket = currentBracket
                 results.append(loser)
+                winner.rank = 1
+                winner.result_bracket = currentBracket
+                results.append(winner)
             }
             else if Int(matchNumber!) == 125 {
                 if Int(loser.losses!) == 1{
@@ -524,8 +536,12 @@ class Match: NSManagedObject {
                     currentBracket?.active = 2
                     next_winner?.hasBye = 3
                     loser.losses = Int(loser.losses!) + 1
+                    assignRank(Int(matchNumber!), loser: loser)
                     loser.result_bracket = currentBracket
                     results.append(loser)
+                    winner.rank = 1
+                    winner.result_bracket = currentBracket
+                    results.append(winner)
                 }
                 else {
                     next_winner?.player1 = loser
@@ -576,6 +592,8 @@ class Match: NSManagedObject {
                 winner.wins = Int(winner.wins!) + 1
                 loser.losses = Int(loser.losses!) + 1
                 next_winner?.player1 = winner
+                assignRank(Int(matchNumber!), loser: loser)
+
                 loser.result_bracket = currentBracket
                 results.append(loser)
                 next_winner?.resolveByes()
@@ -585,6 +603,8 @@ class Match: NSManagedObject {
                     winner.wins = Int(winner.wins!) + 1
                     loser.losses = Int(loser.losses!) + 1
                     next_winner?.player2 = winner
+                    assignRank(Int(matchNumber!), loser: loser)
+
                     loser.result_bracket = currentBracket
                     results.append(loser)
                     next_winner?.resolveByes()
@@ -594,6 +614,8 @@ class Match: NSManagedObject {
                     winner.wins = Int(winner.wins!) + 1
                     loser.losses = Int(loser.losses!) + 1
                     next_winner?.player1 = winner
+                    assignRank(Int(matchNumber!), loser: loser)
+
                     loser.result_bracket = currentBracket
                     results.append(loser)
                     next_winner?.resolveByes()
@@ -604,6 +626,8 @@ class Match: NSManagedObject {
                 winner.wins = Int(winner.wins!) + 1
                 loser.losses = Int(loser.losses!) + 1
                 next_winner?.player1 = winner
+                assignRank(Int(matchNumber!), loser: loser)
+
                 loser.result_bracket = currentBracket
                 results.append(loser)
                 next_winner?.resolveByes()
@@ -614,6 +638,8 @@ class Match: NSManagedObject {
                     winner.wins = Int(winner.wins!) + 1
                     loser.losses = Int(loser.losses!) + 1
                     next_winner?.player2 = winner
+                    assignRank(Int(matchNumber!), loser: loser)
+
                     loser.result_bracket = currentBracket
                     results.append(loser)
                     next_winner?.resolveByes()
@@ -623,6 +649,8 @@ class Match: NSManagedObject {
                     winner.wins = Int(winner.wins!) + 1
                     loser.losses = Int(loser.losses!) + 1
                     next_winner?.player1 = winner
+                    assignRank(Int(matchNumber!), loser: loser)
+
                     loser.result_bracket = currentBracket
                     results.append(loser)
                     next_winner?.resolveByes()
@@ -633,6 +661,8 @@ class Match: NSManagedObject {
                 winner.wins = Int(winner.wins!) + 1
                 loser.losses = Int(loser.losses!) + 1
                 next_winner?.player1 = winner
+                assignRank(Int(matchNumber!), loser: loser)
+
                 loser.result_bracket = currentBracket
                 results.append(loser)
                 next_winner?.resolveByes()
@@ -643,6 +673,8 @@ class Match: NSManagedObject {
                     winner.wins = Int(winner.wins!) + 1
                     loser.losses = Int(loser.losses!) + 1
                     next_winner?.player2 = winner
+                    assignRank(Int(matchNumber!), loser: loser)
+
                     loser.result_bracket = currentBracket
                     results.append(loser)
                     next_winner?.resolveByes()
@@ -651,6 +683,8 @@ class Match: NSManagedObject {
                     winner.wins = Int(winner.wins!) + 1
                     loser.losses = Int(loser.losses!) + 1
                     next_winner?.player1 = winner
+                    assignRank(Int(matchNumber!), loser: loser)
+
                     loser.result_bracket = currentBracket
                     results.append(loser)
                     next_winner?.resolveByes()
@@ -661,6 +695,8 @@ class Match: NSManagedObject {
                 winner.wins = Int(winner.wins!) + 1
                 loser.losses = Int(loser.losses!) + 1
                 next_winner?.player1 = winner
+                assignRank(Int(matchNumber!), loser: loser)
+
                 loser.result_bracket = currentBracket
                 results.append(loser)
                 next_winner?.resolveByes()
@@ -670,6 +706,8 @@ class Match: NSManagedObject {
                     winner.wins = Int(winner.wins!) + 1
                     loser.losses = Int(loser.losses!) + 1
                     next_winner?.player2 = winner
+                    assignRank(Int(matchNumber!), loser: loser)
+
                     loser.result_bracket = currentBracket
                     results.append(loser)
                     next_winner?.resolveByes()
@@ -679,6 +717,8 @@ class Match: NSManagedObject {
                     winner.wins = Int(winner.wins!) + 1
                     loser.losses = Int(loser.losses!) + 1
                     next_winner?.player1 = winner
+                    assignRank(Int(matchNumber!), loser: loser)
+
                     loser.result_bracket = currentBracket
                     results.append(loser)
                     next_winner?.resolveByes()
@@ -689,6 +729,8 @@ class Match: NSManagedObject {
                 winner.wins = Int(winner.wins!) + 1
                 loser.losses = Int(loser.losses!) + 1
                 next_winner?.player1 = winner
+                assignRank(Int(matchNumber!), loser: loser)
+
                 loser.result_bracket = currentBracket
                 results.append(loser)
                 next_winner?.resolveByes()
@@ -697,6 +739,8 @@ class Match: NSManagedObject {
                 winner.wins = Int(winner.wins!) + 1
                 loser.losses = Int(loser.losses!) + 1
                 next_winner?.player1 = winner
+                assignRank(Int(matchNumber!), loser: loser)
+
                 loser.result_bracket = currentBracket
                 results.append(loser)
                 next_winner?.resolveByes()
@@ -764,6 +808,70 @@ class Match: NSManagedObject {
             else {
                 next_winner?.player1 = player1
                 next_winner?.resolveByes()
+            }
+        }
+    }
+    
+    func assignRank(lostMatchID: Int, loser: Participant){
+        if currentBracket?.singleElim == true {
+            if lostMatchID == 62 {
+                loser.rank = 2
+            }
+            else if lostMatchID == 61 {
+                loser.rank = 3
+            }
+            else if lostMatchID == 60{
+                loser.rank = 3
+            }
+            else if lostMatchID > 55 {
+                loser.rank = 5
+            }
+            else if lostMatchID > 47 {
+                loser.rank = 9
+            }
+            else if lostMatchID > 33 {
+                loser.rank = 17
+            }
+            else{
+                loser.rank = 33
+            }
+        }
+        else {
+            if lostMatchID == 126 {
+                loser.rank = 2
+            }
+            else if lostMatchID == 125 {
+                loser.rank = 2
+            }
+            else if lostMatchID == 124 {
+                loser.rank = 3
+            }
+            else if lostMatchID == 123 {
+                loser.rank = 4
+            }
+            else if lostMatchID > 120 {
+                loser.rank = 5
+            }
+            else if lostMatchID > 118 {
+                loser.rank = 7
+            }
+            else if lostMatchID > 114 {
+                loser.rank = 9
+            }
+            else if lostMatchID > 110 {
+                loser.rank = 13
+            }
+            else if lostMatchID > 102 {
+                loser.rank = 17
+            }
+            else if lostMatchID > 94 {
+                loser.rank = 25
+            }
+            else if lostMatchID > 78{
+                loser.rank = 33
+            }
+            else {
+                loser.rank = 49
             }
         }
     }
