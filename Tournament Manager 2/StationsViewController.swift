@@ -76,6 +76,7 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         super.didReceiveMemoryWarning()    }
     
     override func viewWillAppear(animated: Bool) {
+        currentView = self
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         navigationItem.title = "Add Stations"

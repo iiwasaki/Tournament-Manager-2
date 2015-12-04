@@ -76,6 +76,7 @@ class SettingsViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        currentView = self
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         navigationItem.title = "Settings"

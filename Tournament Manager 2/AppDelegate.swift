@@ -56,8 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //since a user cannot receive banner notifications while the app is active, an alert window is used which will popup where ever the user is in the application when a timer for a match goes off. From there they will be able to select their action. 
                 
                 //let TimerAlert = UIAlertController(title: "", message: <#T##String?#>, preferredStyle: .Alert)
-                let test = notification.alertBody
-                print (test)
+                let notification = notification.alertBody
+                print (notification)
+                let alert = UIAlertController(title: "Match Notification", message: notification, preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                
+                //the current view is set whenever a view is loaded through the viewWillAppear of each view
+                currentView?.presentViewController(alert, animated: true, completion: nil)
                 
                 
             }

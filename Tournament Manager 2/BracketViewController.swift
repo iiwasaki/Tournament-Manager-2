@@ -48,6 +48,7 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     override func viewWillAppear(animated: Bool) {
+        currentView = self
         super.viewWillAppear(animated)
         print (matches.count)
         if (currentBracket?.started == false){

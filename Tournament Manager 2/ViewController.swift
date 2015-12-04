@@ -18,7 +18,9 @@ var stations = [Station]() //current stations
 var results = [Participant]() //results of the current bracket
 var matches = [Match]()
 var defaultTimer: Int?
-var globalMatch: Match? 
+var globalMatch: Match?
+var currentView: UIViewController?
+
 
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -58,6 +60,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(animated: Bool) {
         //Retreive brackets from databse
+
+        currentView = self
 
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext

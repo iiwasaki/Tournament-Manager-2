@@ -244,6 +244,7 @@ class MatchViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        currentView = self
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         navigationItem.title = "\(globalMatch!.player1!.name!) vs \(globalMatch!.player2!.name!)"

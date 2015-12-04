@@ -35,6 +35,7 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(animated: Bool) {
+        currentView = self
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         navigationItem.title = "Add Participants"

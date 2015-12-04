@@ -44,6 +44,7 @@ class AddViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(animated: Bool) {
+        currentView = self
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         navigationItem.title = "Add Bracket"

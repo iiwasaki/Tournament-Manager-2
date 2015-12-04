@@ -162,7 +162,6 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
     }
     
     public override func viewWillLayoutSubviews() {
-        // topLayoutGuideの値が確定するこのタイミングで各種ViewControllerをセットする
         setUpViewController(mainContainerView, targetViewController: mainViewController)
         setUpViewController(leftContainerView, targetViewController: leftViewController)
         setUpViewController(rightContainerView, targetViewController: rightViewController)
@@ -171,7 +170,6 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
     public override func openLeft() {
         setOpenWindowLevel()
         
-        //leftViewControllerのviewWillAppearを呼ぶため
         leftViewController?.beginAppearanceTransition(isLeftHidden(), animated: true)
         openLeftWithVelocity(0.0)
         
@@ -181,7 +179,6 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
     public override func openRight() {
         setOpenWindowLevel()
         
-        //menuViewControllerのviewWillAppearを呼ぶため
         rightViewController?.beginAppearanceTransition(isRightHidden(), animated: true)
         openRightWithVelocity(0.0)
     }

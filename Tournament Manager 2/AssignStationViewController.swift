@@ -128,6 +128,7 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     override func viewWillAppear(animated: Bool) {
+        currentView = self
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         navigationItem.title = "Assign Match to a Station"
