@@ -426,15 +426,19 @@ class Match: NSManagedObject {
             }
         }
         else{
-            if Int(matchNumber!) < 63 {
+            if Int(matchNumber!) < 32 {
                 if(Int(matchNumber!)%2 == 0){
                     next_winner?.hasBye = 0
                     next_loser?.hasBye = Int((next_loser?.hasBye)!) - 1
                 }
                 else {
                     next_winner?.hasBye = 0
-                    next_loser?.hasBye = Int((next_loser?.hasBye)!) - 1
+                    next_loser?.hasBye = Int((next_loser?.hasBye)!) - 2
                 }
+            }
+            else if (Int(matchNumber!) >= 32 && Int(matchNumber!) <= 62){
+                next_winner?.hasBye = 0
+                next_loser?.hasBye = Int((next_loser?.hasBye)!) - 1
             }
             else if (Int(matchNumber!) >= 63 && Int(matchNumber!) <= 78){
                 next_winner?.player1 = nil
