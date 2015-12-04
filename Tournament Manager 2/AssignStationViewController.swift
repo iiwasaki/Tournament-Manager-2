@@ -30,9 +30,9 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
         
         else if(stations[AssignSelectedStation!].current_match != nil){
             stations[AssignSelectedStation!].current_match = nil
-            globalMatch?.current_station = nil //need to set a function in match
+            globalMatch?.current_station = nil 
             
-            //clear out timer
+            //clear out notification
             AssignStationLabel.text = "Selected station has been cleared"
         }
         

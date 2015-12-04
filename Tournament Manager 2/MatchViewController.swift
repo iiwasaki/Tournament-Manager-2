@@ -291,8 +291,8 @@ class MatchViewController: UIViewController {
         else if (globalMatch?.current_station != nil){
             AssignOutlet.setTitle("Assigned Station >", forState: .Normal)
             StationName.text = "\(globalMatch!.current_station!.name!)"
+            StationTimer.text = "" 
             
-            //insert code for timer display
             
         }
     }
