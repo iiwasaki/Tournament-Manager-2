@@ -127,6 +127,9 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func helpButton(sender: AnyObject) {
+        let help = UIAlertController(title: "Settings", message: "On the settings page there are two settings that you can change. This first being the Default Timer Length for stations and the second being how the the list of brackets can be sorted. \n \n The Default Timer Legnth is measured in seconds. This Default Timer Length is a rough estimate of how long games/matches are expected to last. It is used for when a Station's Timer Legnth is left empty. \n \n The Bracket sorting can bet set by the Name, Date, or Status of the Bracket. Then it can be put into Ascending or Descending Order.", preferredStyle: .Alert)
+        help.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(help, animated: true, completion: nil)
     }
 
 }

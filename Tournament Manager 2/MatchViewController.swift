@@ -356,6 +356,9 @@ class MatchViewController: UIViewController {
     */
     
     @IBAction func helpButton(sender: AnyObject) {
+        let help = UIAlertController(title: "Matches", message: "Here you see the specifics of how to report a match. If you'd like to assign a station to a specific match, click on the Assign Station button and follow the steps there. To unassign a station, touch the Assigned Station button that takes the Assign Station button's place and follow the steps there.. \n \n TIn the center of the view there is the competitors in a specific match and their corresponding score. If you'd like to disqualify a player, simply hit the corresponding DQ button and submit the result by touching the Submit Result button. \n \n At the bottom of this view, you can assign games to resolve a match to the Participants. Matches can handle up to a best of five. The Scores are udated in real time. You can also clear a DQ before submiting results. To finalize a match, touch the Submit Result button. THIS IS PERMENANT. The only way to undo this is to reset the bracket.", preferredStyle: .Alert)
+        help.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(help, animated: true, completion: nil)
     }
     
 

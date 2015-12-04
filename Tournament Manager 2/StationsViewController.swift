@@ -185,6 +185,9 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
 
     
     @IBAction func helpButton(sender: AnyObject) {
+        let help = UIAlertController(title: "Editing Your Stations", message: "Here you can Add or Delete Stations for your bracket. \n \n To add a station where you games/matches will be played, simply type in a Station Name and an option Timer Length in seconds. Your Timer Legnth is meant to be a rough estimate of how long the matches will take on that Station. If you decide to leave Timer Length empty, it will assume the Default Timer Length that is configured in the Settings View. \n \n To Delete a Station, all you need to do is click on it in the table and then hit the Delete button.", preferredStyle: .Alert)
+        help.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(help, animated: true, completion: nil)
     }
     
 }

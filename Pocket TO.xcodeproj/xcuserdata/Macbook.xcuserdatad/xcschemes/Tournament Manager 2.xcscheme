@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2963CBDB1BEF94090084AF47"
-               BuildableName = "Tournament Manager 2.app"
-               BlueprintName = "Tournament Manager 2"
-               ReferencedContainer = "container:Tournament Manager 2.xcodeproj">
+               BuildableName = "Pocket TO.app"
+               BlueprintName = "Pocket TO"
+               ReferencedContainer = "container:Pocket TO.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2963CBDB1BEF94090084AF47"
-            BuildableName = "Tournament Manager 2.app"
-            BlueprintName = "Tournament Manager 2"
-            ReferencedContainer = "container:Tournament Manager 2.xcodeproj">
+            BuildableName = "Pocket TO.app"
+            BlueprintName = "Pocket TO"
+            ReferencedContainer = "container:Pocket TO.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2963CBDB1BEF94090084AF47"
-            BuildableName = "Tournament Manager 2.app"
-            BlueprintName = "Tournament Manager 2"
-            ReferencedContainer = "container:Tournament Manager 2.xcodeproj">
+            BuildableName = "Pocket TO.app"
+            BlueprintName = "Pocket TO"
+            ReferencedContainer = "container:Pocket TO.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2963CBDB1BEF94090084AF47"
-            BuildableName = "Tournament Manager 2.app"
-            BlueprintName = "Tournament Manager 2"
-            ReferencedContainer = "container:Tournament Manager 2.xcodeproj">
+            BuildableName = "Pocket TO.app"
+            BlueprintName = "Pocket TO"
+            ReferencedContainer = "container:Pocket TO.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -112,6 +112,10 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     //start or reset bracket
     @IBAction func startBracket(sender: AnyObject) {
+        if(currentBracket == nil){
+            return
+        }
+        
         if currentBracket!.started == true {
             //RESET BRACKET CODE
             
@@ -1990,6 +1994,9 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
     */
     
     @IBAction func helpButton(sender: AnyObject) {
+        let help = UIAlertController(title: "Your Bracket", message: "Here is where you will be able to run your bracket. First off you need to add some participants to compete against each other! Go ahead and push the Add Participants button to add some. \n \n After adding competitors, you can start your bracket. Be careful though, because once you start and begin reporting matches, the only way to undo a report is to reset the bracket. You can reset the bracket at any time after you start it. \n \n To report a game/match, simply touch any match in the bracket list that has both competitors in place. This will take you to the Match View. \n \n After your bracket is complete, you can open up the sidebar navigation to see the results.", preferredStyle: .Alert)
+        help.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(help, animated: true, completion: nil)
     }
     
     

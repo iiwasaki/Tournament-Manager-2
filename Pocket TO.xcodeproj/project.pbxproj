@@ -49,7 +49,7 @@
 		292FC1311C0F457F00BA7B2B /* MatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		292FC1331C0F54D000BA7B2B /* AssignStationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignStationViewController.swift; sourceTree = "<group>"; };
 		292FC1351C116BB100BA7B2B /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		2963CBDC1BEF94090084AF47 /* Tournament Manager 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tournament Manager 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2963CBDC1BEF94090084AF47 /* Pocket TO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket TO.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2963CBDF1BEF94090084AF47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2963CBE41BEF940A0084AF47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2963CBE71BEF940A0084AF47 /* Tournament_Manager_2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tournament_Manager_2.xcdatamodel; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		2963CBDD1BEF94090084AF47 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2963CBDC1BEF94090084AF47 /* Tournament Manager 2.app */,
+				2963CBDC1BEF94090084AF47 /* Pocket TO.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,9 +160,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2963CBDB1BEF94090084AF47 /* Tournament Manager 2 */ = {
+		2963CBDB1BEF94090084AF47 /* Pocket TO */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2963CBF11BEF940A0084AF47 /* Build configuration list for PBXNativeTarget "Tournament Manager 2" */;
+			buildConfigurationList = 2963CBF11BEF940A0084AF47 /* Build configuration list for PBXNativeTarget "Pocket TO" */;
 			buildPhases = (
 				2963CBD81BEF94090084AF47 /* Sources */,
 				2963CBD91BEF94090084AF47 /* Frameworks */,
@@ -172,9 +172,9 @@
 			);
 			dependencies = (
 			);
-			name = "Tournament Manager 2";
+			name = "Pocket TO";
 			productName = "Tournament Manager 2";
-			productReference = 2963CBDC1BEF94090084AF47 /* Tournament Manager 2.app */;
+			productReference = 2963CBDC1BEF94090084AF47 /* Pocket TO.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -198,7 +198,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2963CBD71BEF94090084AF47 /* Build configuration list for PBXProject "Tournament Manager 2" */;
+			buildConfigurationList = 2963CBD71BEF94090084AF47 /* Build configuration list for PBXProject "Pocket TO" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -211,7 +211,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2963CBDB1BEF94090084AF47 /* Tournament Manager 2 */,
+				2963CBDB1BEF94090084AF47 /* Pocket TO */,
 			);
 		};
 /* End PBXProject section */
@@ -381,7 +381,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ishiniwasaki.Tournament-Manager-2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pocket TO";
 			};
 			name = Debug;
 		};
@@ -393,14 +393,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ishiniwasaki.Tournament-Manager-2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pocket TO";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2963CBD71BEF94090084AF47 /* Build configuration list for PBXProject "Tournament Manager 2" */ = {
+		2963CBD71BEF94090084AF47 /* Build configuration list for PBXProject "Pocket TO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2963CBEF1BEF940A0084AF47 /* Debug */,
@@ -409,7 +409,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2963CBF11BEF940A0084AF47 /* Build configuration list for PBXNativeTarget "Tournament Manager 2" */ = {
+		2963CBF11BEF940A0084AF47 /* Build configuration list for PBXNativeTarget "Pocket TO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2963CBF21BEF940A0084AF47 /* Debug */,

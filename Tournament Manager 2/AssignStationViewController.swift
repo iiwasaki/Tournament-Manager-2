@@ -108,16 +108,7 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    
-    //buttons to sort the table by name or status of station
-    
-    @IBAction func NameSort(sender: UIButton) {
-        
-    }
-    
-    @IBAction func StatusSort(sender: UIButton) {
-        
-    }
+
     
     
     
@@ -223,6 +214,9 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
     }
     */
     @IBAction func helpButton(sender: AnyObject) {
+        let help = UIAlertController(title: "Assign a Match to a Station", message: "Here you can assign a game/match to a Station. To do so, touch the desired Open Station from the table and touch the Assign button. To clear a match from a station, select a filled Station and then touch the Clear button. \n \n You can send yourself a match notification for when the match should be done byt touching the Set Notification button. Whether you are using the app or not when it resulves, you will be notified and reminded to revisit the match to report and submit results. \n \n For ease of use, the table can also be sorted by the name of the station or it's occupancy status. This way you can quickly find a desired station or open station.", preferredStyle: .Alert)
+        help.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(help, animated: true, completion: nil)
     }
 
 }

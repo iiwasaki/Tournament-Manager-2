@@ -488,5 +488,8 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
         self.view.endEditing(true)
     }
     @IBAction func helpButton(sender: AnyObject) {
+        let help = UIAlertController(title: "Edit Participanta", message: "Here you can Add/Delete participants for your bracket. To Add a Participant, simply give them a name and touch the Add button. To Delete one, touch the desired Participant in the table and then touch the Delete button. \n \n Seeding is very important aspect to a bracket. To reseed a Participant after adding them, simply touch the desired Participant in the table and move them up one seed or down one seed by touching the corresponding button.", preferredStyle: .Alert)
+        help.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        presentViewController(help, animated: true, completion: nil)
     }
 }
