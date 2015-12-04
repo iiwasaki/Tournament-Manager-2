@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		292FC1321C0F457F00BA7B2B /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292FC1311C0F457F00BA7B2B /* MatchViewController.swift */; };
 		292FC1341C0F54D000BA7B2B /* AssignStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292FC1331C0F54D000BA7B2B /* AssignStationViewController.swift */; };
+		292FC1361C116BB100BA7B2B /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292FC1351C116BB100BA7B2B /* CustomTableViewCell.swift */; };
 		2963CBE01BEF94090084AF47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2963CBDF1BEF94090084AF47 /* AppDelegate.swift */; };
 		2963CBE51BEF940A0084AF47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2963CBE31BEF940A0084AF47 /* Main.storyboard */; };
 		2963CBE81BEF940A0084AF47 /* Tournament_Manager_2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2963CBE61BEF940A0084AF47 /* Tournament_Manager_2.xcdatamodeld */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		292FC1311C0F457F00BA7B2B /* MatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		292FC1331C0F54D000BA7B2B /* AssignStationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignStationViewController.swift; sourceTree = "<group>"; };
+		292FC1351C116BB100BA7B2B /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		2963CBDC1BEF94090084AF47 /* Tournament Manager 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tournament Manager 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2963CBDF1BEF94090084AF47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2963CBE41BEF940A0084AF47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				2963CC131BEF9C4C0084AF47 /* UITableViewExtension.swift */,
 				2963CC141BEF9C4C0084AF47 /* UIViewControllerExtension.swift */,
 				2963CBE31BEF940A0084AF47 /* Main.storyboard */,
+				292FC1351C116BB100BA7B2B /* CustomTableViewCell.swift */,
 				292FC1331C0F54D000BA7B2B /* AssignStationViewController.swift */,
 				292FC1311C0F457F00BA7B2B /* MatchViewController.swift */,
 				2963CBE91BEF940A0084AF47 /* Assets.xcassets */,
@@ -250,6 +253,7 @@
 				2963CC151BEF9C4C0084AF47 /* SlideMenuController.swift in Sources */,
 				FA1789881BF94EDA0047901B /* Match.swift in Sources */,
 				296693101C0BD09200F78EBD /* Station.swift in Sources */,
+				292FC1361C116BB100BA7B2B /* CustomTableViewCell.swift in Sources */,
 				2966930A1C0A527C00F78EBD /* Participant+CoreDataProperties.swift in Sources */,
 				2963CC161BEF9C4C0084AF47 /* StationsViewController.swift in Sources */,
 				296693071C0A527C00F78EBD /* Bracket.swift in Sources */,

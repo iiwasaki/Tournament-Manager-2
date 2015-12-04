@@ -30,6 +30,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    
     override func viewWillAppear(animated: Bool) {
         //Retreive brackets from databse
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -45,6 +46,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print ("Could not fetch \(error), \(error.userInfo)")
         }
         
+        tableView.reloadData()
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         navigationItem.title = "Your Brackets"
@@ -60,7 +62,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
         
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CustomTableViewCell
         var activeOrNot: String?
         if(brackets[indexPath.row].active == 0){
             activeOrNot = "Not Started"
@@ -78,7 +80,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let bracketName = selectedBracket.name
         let bracketCreationDate = selectedBracket.creationDate
-        cell.textLabel!.text = bracketName! + " " + bracketCreationDate! + " " + activeOrNot!
+        cell.nameLabel!.text = bracketName!
+        cell.dateLabel!.text = bracketCreationDate!
+        cell.statusLabel!.text = activeOrNot!
+        
         
         return cell
     }

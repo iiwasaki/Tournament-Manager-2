@@ -20,5 +20,5 @@ extension Participant {
     @NSManaged var wins: NSNumber?
     @NSManaged var parent_bracket: Bracket?
     @NSManaged var result_bracket: Bracket? 
-
+    @NSManaged var rank: NSNumber?
 }
