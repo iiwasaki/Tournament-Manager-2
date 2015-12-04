@@ -483,4 +483,9 @@ class ParticipantViewController: UIViewController, UITableViewDelegate, UITableV
     }
     */
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    @IBAction func helpButton(sender: AnyObject) {
+    }
 }

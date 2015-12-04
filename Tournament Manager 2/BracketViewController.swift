@@ -1988,4 +1988,8 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     */
     
+    @IBAction func helpButton(sender: AnyObject) {
+    }
+    
+    
 }

@@ -353,5 +353,9 @@ class MatchViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func helpButton(sender: AnyObject) {
+    }
+    
 
 }

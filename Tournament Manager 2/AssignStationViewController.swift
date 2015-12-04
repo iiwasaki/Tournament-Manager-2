@@ -20,9 +20,6 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
     //Assign Status label
     @IBOutlet weak var AssignStationLabel: UILabel!
     
-    //buttons to clear the station and assign the station
-    @IBAction func setNotification(sender: AnyObject) {
-    }
     
     @IBAction func ClearStation(sender: UIButton) {
         if (globalMatch?.inProgress == 2){
@@ -200,6 +197,21 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
 
+    @IBAction func sortByName(sender: AnyObject) {
+        stations.sortInPlace{$0.name!.lowercaseString < $1.name!.lowercaseString}
+        AssignStationTable.reloadData()
+    }
+    
+    
+    @IBAction func sortByStatus(sender: AnyObject) {
+        stations.sortInPlace{Int($0.filled!) < Int($1.filled!)}
+        AssignStationTable.reloadData()
+    
+    }
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 
@@ -209,5 +221,7 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func helpButton(sender: AnyObject) {
+    }
 
 }

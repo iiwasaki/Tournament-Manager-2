@@ -14,6 +14,9 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var UpdateLabel: UILabel!
     
+    @IBOutlet weak var errorLabel: UILabel!
+    
+    
     //Update Timer Button
     @IBAction func UpdateTimer(sender: UIButton) {
         if (DefTimer.text == ""){
@@ -79,6 +82,7 @@ class SettingsViewController: UIViewController {
         if defaultTimer != nil {
             DefTimer.text! = String(defaultTimer)
         }
+        errorLabel.text! = ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -96,12 +100,19 @@ class SettingsViewController: UIViewController {
         
         do {
             try managedContext.executeRequest(deleteRequest)
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.removeObjectForKey("selectedBracket")
+            errorLabel.text = "Deleted all brackets."
+            
+            
         } catch let error as NSError {
             print ("Error: \(error)")
         }
     }
     
-    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
     /*
     // MARK: - Navigation
@@ -112,5 +123,9 @@ class SettingsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    @IBAction func helpButton(sender: AnyObject) {
+    }
 
 }

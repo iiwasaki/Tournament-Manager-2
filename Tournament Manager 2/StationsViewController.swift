@@ -109,6 +109,7 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
                     try managedContext.save()
                     stations.append(newStation)
                     StationsTable.reloadData()
+                    TimerLength.text = ""
                 } catch let error as NSError {
                     print ("Could not save \(error)")
                 }
@@ -176,5 +177,13 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
+    
+    @IBAction func helpButton(sender: AnyObject) {
+    }
+    
 }
