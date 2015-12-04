@@ -32,48 +32,72 @@ class AssignStationViewController: UIViewController, UITableViewDelegate, UITabl
         
         else if(stations[AssignSelectedStation!].current_match != nil){
             stations[AssignSelectedStation!].current_match = nil
-            globalMatch?.current_station = nil 
+            globalMatch?.current_station = nil
+            globalMatch?.inProgress = 0
+            stations[AssignSelectedStation!].filled = 0
             
-            //clear out notification
             AssignStationLabel.text = "Selected station has been cleared"
         }
         
-        //insert code for timer and background timer to clear them
     }
     
     @IBAction func AssignStation(sender: UIButton) {
-        stations[AssignSelectedStation!].current_match = globalMatch
-        globalMatch?.inProgress = 1
-        globalMatch?.current_station = stations[AssignSelectedStation!]
-        stations[AssignSelectedStation!].filled = 1
+        
+        if (globalMatch!.current_station != nil){
+            AssignStationLabel.text = "Already assgined to a station"
+        }
+        else{
+            stations[AssignSelectedStation!].current_match = globalMatch
+            globalMatch?.inProgress = 1
+            globalMatch?.current_station = stations[AssignSelectedStation!]
+            stations[AssignSelectedStation!].filled = 1
+            AssignStationLabel.text = "Station has been assigned"
+            AssignStationTable.reloadData()
+            
+            let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "backButton")
+            navigationItem.leftBarButtonItem = backButton
+            
+            
+        }
+        
+    
+        
+    }
+    
+    @IBAction func SetNotification(sender: AnyObject) {
         
         //This checks that the user allowed the use of local notifications
         guard let settings = UIApplication.sharedApplication().currentUserNotificationSettings() else { return }
         
-        if settings.types == .None {
-            let ac = UIAlertController(title: "Can't assign station", message: "Notifications have not been approved", preferredStyle: .Alert)
+        if settings.types == .None { //this stil needs to be changed
+            let ac = UIAlertController(title: "Can't Set a Notification", message: "Notifications have not been approved", preferredStyle: .Alert)
             ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             presentViewController(ac, animated: true, completion: nil)
         }
-        
+            
         else{
-        //This schedules the local notification
+            if (globalMatch!.current_station == nil){
+                AssignStationLabel.text = "Unable to set because match is not assigned to a station"
+            }
+            
+            else {
+            //This schedules the local notification
             let notification = UILocalNotification()
-                notification.fireDate = NSDate(timeIntervalSinceNow: Double(stations[AssignSelectedStation!].time!))
-                notification.alertBody = "\(globalMatch!.parent_bracket!.name!) - \(globalMatch!.player1!.name!) vs \(globalMatch!.player2!.name!) should be reported!"
-                notification.alertAction = "to be done"
-                notification.soundName = UILocalNotificationDefaultSoundName
-                notification.userInfo = ["CustomField1": "Notification Received"]
-                UIApplication.sharedApplication().scheduleLocalNotification(notification)
+            notification.fireDate = NSDate(timeIntervalSinceNow: Double(globalMatch!.current_station!.time!))
+            notification.alertBody = "\(globalMatch!.parent_bracket!.name!) - \(globalMatch!.player1!.name!) vs \(globalMatch!.player2!.name!) should be reported!"
+            notification.alertAction = "to be done"
+            notification.soundName = UILocalNotificationDefaultSoundName
+            notification.userInfo = ["CustomField1": "Notification Received"]
+            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+                
+            AssignStationLabel.text = "Notification for match set!"
+                
+            
+            }
         }
-    
-        //insert code for timer
-        
+
     }
     
-    func Action(){
-        
-    }
     
     //buttons to sort the table by name or status of station
     
