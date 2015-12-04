@@ -22,6 +22,7 @@ class AddViewController: UIViewController {
     //text fields
     @IBOutlet weak var bracketName: UITextField!
     
+    @IBOutlet weak var gameName: UITextField!
     //Single or Double Elimination
     @IBOutlet weak var elimType: UISegmentedControl!
     
@@ -67,8 +68,12 @@ class AddViewController: UIViewController {
     
     @IBAction func createButton(sender: AnyObject) {
         let name = bracketName.text
+        let gname = gameName.text
         if (name == ""){
-            errorLabel.text = "Name cannot be blank"
+            errorLabel.text = "Name cannot be blank."
+        }
+        else if (gname == ""){
+            errorLabel.text = "Game name cannot be blank."
         }
         else{
             // Use Core Data functionality to add the brackets!
@@ -81,6 +86,7 @@ class AddViewController: UIViewController {
             
             savedBracket.name = bracketName.text
             savedBracket.active = 0
+            savedBracket.gameName = gameName.text
             
             let date = NSDate()
             let formatter = NSDateFormatter()

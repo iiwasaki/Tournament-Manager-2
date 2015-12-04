@@ -22,18 +22,46 @@ class SettingsViewController: UIViewController {
         else {
             defaultTimer = Int(DefTimer.text!)
             UpdateLabel.text = "Timer Updated!"
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setObject(Int(UpdateLabel.text!), forKey: "defaultTimer")
         }
     }
 
     
-    @IBOutlet weak var AscendOrDescend: UISegmentedControl!
+    @IBOutlet weak var sortingControl: UISegmentedControl!
+
     
+    @IBOutlet weak var ascOrDsc: UISegmentedControl!
     
-    @IBOutlet weak var SortingMethod: UISegmentedControl!
-    
-    @IBAction func BracketSort(sender: AnyObject) {
-        
+    @IBAction func sortingChanged(sender: UISegmentedControl) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        switch sortingControl.selectedSegmentIndex {
+        case 0:
+            defaults.setInteger(0, forKey: "sortingMethod")
+        case 1:
+            defaults.setInteger(1, forKey: "sortingMethod")
+        case 2:
+            defaults.setInteger(2, forKey: "sortingMethod")
+        default:
+            break
+        }
     }
+    
+    
+    @IBAction func ascChanged(sender: UISegmentedControl) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        switch ascOrDsc.selectedSegmentIndex {
+        case 0:
+            defaults.setInteger(0, forKey: "ascMethod")
+        case 1:
+            defaults.setInteger(1, forKey: "ascMethod")
+        default:
+            break
+    }
+    }
+    
+    
+    
     
     //Textfields
     @IBOutlet weak var DefTimer: UITextField!
@@ -48,6 +76,9 @@ class SettingsViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         navigationItem.title = "Settings"
+        if defaultTimer != nil {
+            DefTimer.text! = String(defaultTimer)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,6 +100,8 @@ class SettingsViewController: UIViewController {
             print ("Error: \(error)")
         }
     }
+    
+    
 
     /*
     // MARK: - Navigation

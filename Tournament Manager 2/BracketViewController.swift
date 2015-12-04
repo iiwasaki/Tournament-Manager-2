@@ -31,6 +31,7 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
     var grandFinalsRound = [Match]()
 
 
+    @IBOutlet weak var gameNameLabel: UILabel!
 
     @IBOutlet weak var errorLabel: UILabel!
     
@@ -53,33 +54,6 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
             assignInitialByes()
         }
         createRounds()
-        //print(matches[60])
-        //print (matches[62])
-        /*
-        print ("match 59: \(matches[59].hasBye!)")
-        print ("match 61: \(matches[61].hasBye!)")
-        for index in 111...123{
-            print("match \(index): \(matches[index].hasBye!)")
-        }
-        */
-        /*
-        print ("match 115: \(matches[115].hasBye!)")
-
-        print ("match 115: \(matches[115].hasBye!)")
-        print ("match 116: \(matches[116].hasBye!)")
-        print ("match 117: \(matches[117].hasBye!)")
-        print ("match 118: \(matches[118].hasBye!)")
-        print ("match 119: \(matches[119].hasBye!)")
-        print ("match 120: \(matches[120].hasBye!)")
-        print ("match 121: \(matches[121].hasBye!)")
-        print ("match 122: \(matches[122].hasBye!)")
-        print ("match 123: \(matches[123].hasBye!)")
-*/
-       // print(matches[124].hasBye!)
-       // print(matches[125].hasBye!)
-       // print(matches[126].hasBye!)
-        //print(matches[115].hasBye!)
-        //print(matches[119].hasBye!)
 
 
         tableView.reloadData()
@@ -91,6 +65,7 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         else
         {
+            gameNameLabel.text! = currentBracket!.gameName!
             if currentBracket?.singleElim == true {
                 navigationItem.title = "\(currentBracket!.name!)-(S)"
             }
@@ -138,6 +113,37 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func startBracket(sender: AnyObject) {
         if currentBracket!.started == true {
             //RESET BRACKET CODE
+            
+            currentBracket?.started = false
+            currentBracket?.active = 0
+            
+            for eachMatch in matches{
+                eachMatch.hasBye = 0
+                eachMatch.playerDQ = 0
+                eachMatch.inProgress = 0
+                eachMatch.score_player1 = 0
+                eachMatch.score_player2 = 0
+                eachMatch.current_station?.current_match = nil
+                eachMatch.current_station = nil
+            }
+            for index in 32...62{
+                matches[index].player1 = nil
+                matches[index].player2 = nil
+
+            }
+            if (currentBracket?.singleElim == false ){
+                for index in 63...126{
+                    matches[index].player1 = nil
+                    matches[index].player2 = nil
+                    
+                }
+            }
+            
+            var participantViewController: UIViewController!
+            participantViewController = storyboard!.instantiateViewControllerWithIdentifier("ParticipantViewController") as! ParticipantViewController
+            participantViewController = UINavigationController(rootViewController: participantViewController)
+            self.slideMenuController()?.changeMainViewController(participantViewController, close: true)
+            
         }
         else if (currentBracket?.numParts != nil && Int((currentBracket?.numParts)!) >= 3){
             //Start bracket

@@ -26,6 +26,7 @@ extension Bracket {
     @NSManaged var matches: NSSet?
     @NSManaged var stations: NSSet?
     @NSManaged var bracketType: NSNumber?
+    @NSManaged var gameName: String?
     /* Bracket Types:
     0: 4-person, single-elimination
     1: 4-person, double-elimination

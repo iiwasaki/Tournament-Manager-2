@@ -228,6 +228,7 @@ class MatchViewController: UIViewController {
             do {
                 try managedContext.save()
                 MessageLabel.text = "Match results saved and submitted."
+                globalMatch?.current_station?.filled = 0 
                 globalMatch?.current_station?.current_match = nil
             } catch let error as NSError {
                 print("Could not save \(error)")

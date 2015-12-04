@@ -53,7 +53,7 @@ class ResultsViewController: UIViewController, UITableViewDataSource {
                 let name = part.name!
                 let winTotal = part.wins!
                 let lossTotal = part.losses!
-                cell.textLabel!.text = "\(ranking): \(name) W: \(winTotal) L: \(lossTotal)"
+                cell.textLabel!.text = "\(ranking): \(name) \t\t W: \(winTotal) L: \(lossTotal)"
             }
         }
         return cell

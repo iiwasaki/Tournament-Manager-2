@@ -50,11 +50,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             results = currentBracket!.results?.allObjects as! [Participant]
             matches.sortInPlace{Int($0.matchNumber!) < Int($1.matchNumber!)}
         }
+        if let defTime = defaults.objectForKey("defaultTimer"){
+            defaultTimer = Int(defTime as! String)
+        }
     }
     
     
     override func viewWillAppear(animated: Bool) {
         //Retreive brackets from databse
+
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "Bracket")
@@ -62,7 +66,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         do {
             let results = try managedContext.executeFetchRequest(fetchRequest)
             brackets = results as! [Bracket]
-            brackets.sortInPlace{$0.name!.lowercaseString < $1.name!.lowercaseString}
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let sortingMethods = defaults.integerForKey("sortingMethod")
+            let ascMethod = defaults.integerForKey("ascMethod")
+            sortBrackets(sortingMethods, aOrD: ascMethod)
             print("Fetched\n")
         } catch let error as NSError {
             print ("Could not fetch \(error), \(error.userInfo)")
@@ -72,6 +79,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         navigationItem.title = "Your Brackets"
+    }
+    
+    func sortBrackets(way: Int, aOrD: Int){
+        if way == 0{
+            brackets.sortInPlace{$0.name!.lowercaseString < $1.name!.lowercaseString}
+            if aOrD == 1{
+                brackets = brackets.reverse()
+            }
+        }
+        else if way == 1{
+            brackets.sortInPlace{$0.creationDate! < $1.creationDate!}
+            if aOrD == 1 {
+                brackets = brackets.reverse()
+            }
+        }
+        else if way == 2{
+            brackets.sortInPlace{Int($0.active!) < Int($1.active!)}
+            if aOrD == 1 {
+                brackets = brackets.reverse()
+            }
+        }
+        else {
+            brackets.sortInPlace{$0.name!.lowercaseString < $1.name!.lowercaseString}
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -128,6 +159,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.slideMenuController()?.changeMainViewController(bracketViewController, close: true)
     }
     
+    
+    @IBAction func sortByName(sender: AnyObject) {
+        brackets.sortInPlace{$0.name!.lowercaseString < $1.name!.lowercaseString}
+        tableView.reloadData()
+    }
+    
+    @IBAction func sortByDate(sender: AnyObject) {
+        brackets.sortInPlace{$0.creationDate! < $1.creationDate!}
+        tableView.reloadData()
+    }
+    @IBAction func sortByStatus(sender: AnyObject) {
+        brackets.sortInPlace{Int($0.active!) < Int($1.active!)}
+        tableView.reloadData()
+    }
     
 }
 
