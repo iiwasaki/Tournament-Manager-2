@@ -240,14 +240,14 @@ class MatchViewController: UIViewController {
     //changes assign station button slightly if a station is assgined
     func AssignButtonCheck() {
         if (globalMatch?.current_station == nil){
-            AssignOutlet.setTitle("Assign Station", forState: .Normal)
+            AssignOutlet.setTitle("Assign Station >", forState: .Normal)
             StationName.text = ""
             StationTimer.text = ""
             
         }
         
         else if (globalMatch?.current_station != nil){
-            AssignOutlet.setTitle("Assigned Station", forState: .Normal)
+            AssignOutlet.setTitle("Assigned Station >", forState: .Normal)
             StationName.text = "\(globalMatch?.current_station?.name)"
             
             //insert code for timer display

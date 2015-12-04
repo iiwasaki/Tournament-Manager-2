@@ -41,6 +41,7 @@
 		2966930F1C0BD09200F78EBD /* Station+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2966930D1C0BD09200F78EBD /* Station+CoreDataProperties.swift */; };
 		296693101C0BD09200F78EBD /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2966930E1C0BD09200F78EBD /* Station.swift */; };
 		FA1789881BF94EDA0047901B /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1789871BF94EDA0047901B /* Match.swift */; };
+		FAF45AC11C112D1E005E7F97 /* help_question_mark.png in Resources */ = {isa = PBXBuildFile; fileRef = FAF45AC01C112D1E005E7F97 /* help_question_mark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		2966930D1C0BD09200F78EBD /* Station+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Station+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2966930E1C0BD09200F78EBD /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		FA1789871BF94EDA0047901B /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		FAF45AC01C112D1E005E7F97 /* help_question_mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_question_mark.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		2963CBDE1BEF94090084AF47 /* Tournament Manager 2 */ = {
 			isa = PBXGroup;
 			children = (
+				FAF45AC01C112D1E005E7F97 /* help_question_mark.png */,
 				2966930D1C0BD09200F78EBD /* Station+CoreDataProperties.swift */,
 				2966930E1C0BD09200F78EBD /* Station.swift */,
 				2966930B1C0BC4DC00F78EBD /* Match+CoreDataProperties.swift */,
@@ -224,6 +227,7 @@
 				2963CBFC1BEF9AB50084AF47 /* ic_menu_black_24dp@3x.png in Resources */,
 				2963CBFF1BEF9AB50084AF47 /* ic_notifications_black_24dp@3x.png in Resources */,
 				2963CBE51BEF940A0084AF47 /* Main.storyboard in Resources */,
+				FAF45AC11C112D1E005E7F97 /* help_question_mark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
