@@ -19,5 +19,6 @@ extension Participant {
     @NSManaged var seed: NSNumber?
     @NSManaged var wins: NSNumber?
     @NSManaged var parent_bracket: Bracket?
+    @NSManaged var result_bracket: Bracket? 
 
 }

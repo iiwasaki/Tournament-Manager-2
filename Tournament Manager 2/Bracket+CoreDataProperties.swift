@@ -20,6 +20,7 @@ extension Bracket {
     @NSManaged var numParts: NSNumber?
     @NSManaged var singleElim: NSNumber?
     @NSManaged var players: NSSet?
+    @NSManaged var results: NSSet?
     @NSManaged var started: NSNumber? //started bracket or not, for editing participants
     @NSManaged var winner: Participant? 
     @NSManaged var matches: NSSet?

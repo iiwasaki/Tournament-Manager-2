@@ -28,6 +28,9 @@ class Match: NSManagedObject {
                 next_winner = matches[div + 32]
                 
             }
+            else if (Int(matchNumber!) == 62){
+                next_winner = matches[125]
+            }
             else if (Int(matchNumber!) >= 63 && Int(matchNumber!) <= 78){
                 next_winner = matches[Int(matchNumber!) + 16]
             }
@@ -472,6 +475,296 @@ class Match: NSManagedObject {
         }
         else {
             hasBye = 0
+        }
+    }
+    
+    
+    func resolveWinLoss(winner: Participant, loser: Participant){
+        
+        if currentBracket?.singleElim == true {
+            if lastMatch == true{
+                currentBracket?.winner = winner
+                winner.wins = Int(winner.wins!) + 1
+                loser.losses = Int(loser.losses!) + 1
+                currentBracket?.active = 2
+            }
+            else{
+                if Int(matchNumber!)%2==0{
+                    next_winner?.player1 = winner
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                }
+                else {
+                    next_winner?.player2 = winner
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                }
+            }
+            inProgress = 2
+        }
+        else {
+            //double elim 
+            if lastMatch == true{
+                currentBracket?.winner = winner
+                winner.wins = Int(winner.wins!) + 1
+                currentBracket?.active = 2
+                loser.losses = Int(loser.losses!) + 1
+                loser.result_bracket = currentBracket
+                results.append(loser)
+            }
+            else if Int(matchNumber!) == 125 {
+                if Int(loser.losses!) == 1{
+                    //tournament done 
+                    winner.wins = Int(winner.wins!) + 1
+                    currentBracket?.winner = winner
+                    currentBracket?.active = 2
+                    next_winner?.hasBye = 3
+                    loser.losses = Int(loser.losses!) + 1
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                }
+                else {
+                    next_winner?.player1 = loser
+                    next_winner?.player2 = winner
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                }
+            }
+            else if Int(matchNumber!) >= 0 && Int(matchNumber!) <= 31 {
+                //first loss in winner bracket
+                if Int(matchNumber!)%2 == 0{
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player1 = winner
+                    next_loser?.player1 = loser
+                }
+                else {
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player2 = winner
+                    next_loser?.player2 = loser
+                }
+            }
+            else if Int(matchNumber!) >= 32 && Int(matchNumber!) <= 61{
+                if Int(matchNumber!)%2 == 0{
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player1 = winner
+                    next_loser?.player2 = loser
+                    next_loser?.resolveByes()
+                }
+                else {
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player2 = winner
+                    next_loser?.player2 = loser
+                    next_loser?.resolveByes()
+                }
+            }
+            else if Int(matchNumber!) == 62{
+                winner.wins = Int(winner.wins!) + 1
+                loser.losses = Int(loser.losses!) + 1
+                next_winner?.player2 = winner
+                next_loser?.player2 = loser
+                next_loser?.resolveByes()
+            }
+            else if Int(matchNumber!) >= 63 && Int(matchNumber!) <= 78{
+                winner.wins = Int(winner.wins!) + 1
+                loser.losses = Int(loser.losses!) + 1
+                next_winner?.player1 = winner
+                loser.result_bracket = currentBracket
+                results.append(loser)
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) >= 79 && Int(matchNumber!) <= 94{
+                if Int(matchNumber!)%2 == 0{
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player2 = winner
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                    next_winner?.resolveByes()
+
+                }
+                else{
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player1 = winner
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                    next_winner?.resolveByes()
+
+                }
+            }
+            else if Int(matchNumber!) >= 95 && Int(matchNumber!) <= 102{
+                winner.wins = Int(winner.wins!) + 1
+                loser.losses = Int(loser.losses!) + 1
+                next_winner?.player1 = winner
+                loser.result_bracket = currentBracket
+                results.append(loser)
+                next_winner?.resolveByes()
+
+            }
+            else if Int(matchNumber!) >= 103 && Int(matchNumber!) <= 110{
+                if Int(matchNumber!)%2 == 0{
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player2 = winner
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                    next_winner?.resolveByes()
+
+                }
+                else{
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player1 = winner
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                    next_winner?.resolveByes()
+
+                }
+            }
+            else if Int(matchNumber!) >= 111 && Int(matchNumber!) <= 114{
+                winner.wins = Int(winner.wins!) + 1
+                loser.losses = Int(loser.losses!) + 1
+                next_winner?.player1 = winner
+                loser.result_bracket = currentBracket
+                results.append(loser)
+                next_winner?.resolveByes()
+
+            }
+            else if Int(matchNumber!) >= 115 && Int(matchNumber!) <= 118{
+                if Int(matchNumber!)%2 == 0{
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player2 = winner
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                    next_winner?.resolveByes()
+                }
+                else{
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player1 = winner
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                    next_winner?.resolveByes()
+
+                }
+            }
+            else if Int(matchNumber!) >= 119 && Int(matchNumber!) <= 120{
+                winner.wins = Int(winner.wins!) + 1
+                loser.losses = Int(loser.losses!) + 1
+                next_winner?.player1 = winner
+                loser.result_bracket = currentBracket
+                results.append(loser)
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) >= 121 && Int(matchNumber!) <= 122{
+                if Int(matchNumber!)%2 == 0{
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player2 = winner
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                    next_winner?.resolveByes()
+
+                }
+                else{
+                    winner.wins = Int(winner.wins!) + 1
+                    loser.losses = Int(loser.losses!) + 1
+                    next_winner?.player1 = winner
+                    loser.result_bracket = currentBracket
+                    results.append(loser)
+                    next_winner?.resolveByes()
+
+                }
+            }
+            else if Int(matchNumber!) == 123{
+                winner.wins = Int(winner.wins!) + 1
+                loser.losses = Int(loser.losses!) + 1
+                next_winner?.player1 = winner
+                loser.result_bracket = currentBracket
+                results.append(loser)
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) == 124{
+                winner.wins = Int(winner.wins!) + 1
+                loser.losses = Int(loser.losses!) + 1
+                next_winner?.player1 = winner
+                loser.result_bracket = currentBracket
+                results.append(loser)
+                next_winner?.resolveByes()
+            }
+            inProgress = 2
+        }
+    }
+    
+    func resolveByes(){
+        if hasBye == 1{
+            if Int(matchNumber!) >= 63 && Int(matchNumber!) <= 78{
+                next_winner?.player1 = player2
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) >= 95 && Int(matchNumber!) <= 102{
+                next_winner?.player1 = player2
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) >= 111 && Int(matchNumber!) <= 114{
+                next_winner?.player1 = player2
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) >= 119 && Int(matchNumber!) <= 120{
+                next_winner?.player1 = player2
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) == 123 {
+                next_winner?.player1 = player2
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!)%2 == 0 {
+                next_winner?.player2 = player2
+                next_winner?.resolveByes()
+            }
+            else {
+                next_winner?.player1 = player2
+                next_winner?.resolveByes()
+            }
+        }
+        else if hasBye == 2{
+            if Int(matchNumber!) >= 63 && Int(matchNumber!) <= 78{
+                next_winner?.player1 = player1
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) >= 95 && Int(matchNumber!) <= 102{
+                next_winner?.player1 = player1
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) >= 111 && Int(matchNumber!) <= 114{
+                next_winner?.player1 = player1
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) >= 119 && Int(matchNumber!) <= 120{
+                next_winner?.player1 = player1
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!) == 123 {
+                next_winner?.player1 = player1
+                next_winner?.resolveByes()
+            }
+            else if Int(matchNumber!)%2 == 0 {
+                next_winner?.player2 = player1
+                next_winner?.resolveByes()
+            }
+            else {
+                next_winner?.player1 = player1
+                next_winner?.resolveByes()
+            }
         }
     }
     

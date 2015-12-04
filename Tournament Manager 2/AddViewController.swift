@@ -97,7 +97,6 @@ class AddViewController: UIViewController {
             
             do {
                 try managedContext.save()
-                brackets.append(savedBracket)
             } catch let error as NSError {
                 print("Could not save \(error)")
             }
@@ -114,6 +113,7 @@ class AddViewController: UIViewController {
             }
             do {
                 try managedContext.save()
+                brackets.append(savedBracket)
                 print("Saved")
             } catch let error as NSError {
                 print("Could not save \(error)")

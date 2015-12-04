@@ -15,6 +15,7 @@ var brackets = [Bracket]()
 var currentBracket: Bracket? //the current bracket in use
 var competitors = [Participant]() //current participants
 var stations = [Station]() //current stations
+var results = [Participant]() //results of the current bracket
 var matches = [Match]()
 var defaultTimer: Int?
 var globalMatch: Match? 
@@ -72,7 +73,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             activeOrNot = "Finished"
         }
         
-        brackets.sortInPlace{$0.name!.lowercaseString < $1.name!.lowercaseString}
+        //brackets.sortInPlace{$0.name!.lowercaseString < $1.name!.lowercaseString}
         let selectedBracket = brackets[indexPath.row]
         
         let bracketName = selectedBracket.name
@@ -86,7 +87,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         currentBracket = brackets[indexPath.row]
         competitors = currentBracket!.players?.allObjects as! [Participant]
         matches = currentBracket!.matches?.allObjects as! [Match]
+        stations = currentBracket!.stations?.allObjects as! [Station]
         competitors.sortInPlace{Int($0.seed!) < Int($1.seed!)}
+        results = currentBracket!.results?.allObjects as! [Participant]
         matches.sortInPlace{Int($0.matchNumber!) < Int($1.matchNumber!)}
         
         var bracketViewController: UIViewController!

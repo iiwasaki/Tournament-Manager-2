@@ -176,19 +176,19 @@ class MatchViewController: UIViewController {
                 //if no score for player 1
             else if(globalMatch?.score_player1 == nil){
                 P1Score.text = "Score: "
-                P2Score.text = "Score: \(globalMatch?.score_player2)"
+                P2Score.text = "Score: \(globalMatch!.score_player2!)"
             }
                 
                 //if no score for player 2
             else if(globalMatch?.score_player2 == nil){
-                P1Score.text = "Score: \(globalMatch?.score_player1)"
+                P1Score.text = "Score: \(globalMatch!.score_player1!)"
                 P2Score.text = "Score: "
             }
                 
                 //if scores have been set for both players
             else{
-                P1Score.text = "Score: \(globalMatch?.score_player1)"
-                P2Score.text = "Score: \(globalMatch?.score_player2)"
+                P1Score.text = "Score: \(globalMatch!.score_player1!)"
+                P2Score.text = "Score: \(globalMatch!.score_player2!)"
             }
         }
         
@@ -199,14 +199,40 @@ class MatchViewController: UIViewController {
     @IBAction func SubmitResults(sender: UIButton) {
         if(globalMatch?.inProgress == 2){
             MessageLabel.text = "Unable to Submit Result because it has already been submitted"
-            
         }
         
         else{ //determine players of next matches. winners/losers
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+
             if(globalMatch?.playerDQ == 1){
-                
-                
+                globalMatch?.resolveWinLoss((globalMatch?.player2)!, loser: (globalMatch?.player1)!)
             }
+            else if (globalMatch?.playerDQ == 2){
+                globalMatch?.resolveWinLoss((globalMatch?.player1)!, loser: (globalMatch?.player2)!)
+            }
+            else {
+                //No DQ, find out who the winner is 
+                if (Int(globalMatch!.score_player1!) > Int(globalMatch!.score_player2!)){
+                    globalMatch?.resolveWinLoss((globalMatch?.player1)!, loser: (globalMatch?.player2)!)
+                }
+                else if (Int(globalMatch!.score_player2!) > Int(globalMatch!.score_player1!)){
+                    globalMatch?.resolveWinLoss((globalMatch?.player2)!, loser: (globalMatch?.player1)!)
+                }
+                else {
+                    //tie 
+                    MessageLabel.text = "Match cannot be a tie!"
+                }
+            }
+        
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Could not save \(error)")
+            }
+            print (globalMatch)
+            print (globalMatch?.next_loser)
+            print (globalMatch?.next_loser?.next_winner)
         }
     }
     
@@ -219,9 +245,14 @@ class MatchViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
-        navigationItem.title = "\(globalMatch?.player1?.name) vs \(globalMatch?.player2?.name)"
+        navigationItem.title = "\(globalMatch!.player1!.name!) vs \(globalMatch!.player2!.name!)"
         let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "backButton")
         navigationItem.leftBarButtonItem = backButton
+        P1Label2.text! = globalMatch!.player1!.name!
+        P2Label2.text! = globalMatch!.player2!.name!
+        P1Label1.text! = globalMatch!.player1!.name!
+        P2Label1.text! = globalMatch!.player2!.name!
+
         
         AssignButtonCheck()
         LoadScores()
@@ -230,6 +261,17 @@ class MatchViewController: UIViewController {
     }
     
     func backButton(){
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save \(error)")
+        }
+
         var bracketViewController: UIViewController!
         
         bracketViewController = storyboard!.instantiateViewControllerWithIdentifier("BracketViewController") as! BracketViewController
@@ -248,7 +290,7 @@ class MatchViewController: UIViewController {
         
         else if (globalMatch?.current_station != nil){
             AssignOutlet.setTitle("Assigned Station >", forState: .Normal)
-            StationName.text = "\(globalMatch?.current_station?.name)"
+            StationName.text = "\(globalMatch!.current_station!.name!)"
             
             //insert code for timer display
             
@@ -267,17 +309,17 @@ class MatchViewController: UIViewController {
                 
             else if(globalMatch?.score_player1 == nil){
                 P1Score.text = "Score: "
-                P2Score.text = "Score: \(globalMatch?.score_player2)"
+                P2Score.text = "Score: \(globalMatch!.score_player2!)"
             }//this check is done to see if only p1 score is nil while p2 would have an actual score
                 
             else if(globalMatch?.score_player2 == nil){
-                P1Score.text = "Score: \(globalMatch?.score_player1)"
+                P1Score.text = "Score: \(globalMatch!.score_player1!)"
                 P2Score.text = "Score: "
             }
                 
             else {
-                P1Score.text = "Score: \(globalMatch?.score_player1)"
-                P2Score.text = "Score: \(globalMatch?.score_player2)"
+                P1Score.text = "Score: \(globalMatch!.score_player1!)"
+                P2Score.text = "Score: \(globalMatch!.score_player2!)"
             }
         }
         

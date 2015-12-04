@@ -49,16 +49,12 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         print (matches.count)
-        assignInitialByes()
+        if (currentBracket?.started == false){
+            assignInitialByes()
+        }
         createRounds()
-        print ("matches")
-        for index in 0...62{
-            print("match \(index): \(matches[index].hasBye!)")
-        }
-        for index in 63...94{
-            print("match \(index): \(matches[index].hasBye!)")
-
-        }
+        //print(matches[60])
+        //print (matches[62])
         /*
         print ("match 59: \(matches[59].hasBye!)")
         print ("match 61: \(matches[61].hasBye!)")
@@ -102,8 +98,9 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
                 navigationItem.title = "\(currentBracket!.name!)-(D)"
             }
             if currentBracket?.started == true{
-                //Don't add the "Add players" button
-                startBut.setTitle("Stations List", forState: .Normal)
+                let addParticipantButton = UIBarButtonItem(title: "View Stations", style: UIBarButtonItemStyle.Plain, target: self, action: "addParticipantButton")
+                    navigationItem.rightBarButtonItem = addParticipantButton
+                startBut.setTitle("Reset Bracket", forState: .Normal)
             }
             else {
                 let addParticipantButton = UIBarButtonItem(title: "Add Players", style: UIBarButtonItemStyle.Plain, target: self, action: "addParticipantButton")
@@ -118,11 +115,14 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+    //add participants or view stations
     func addParticipantButton(){
         
         if currentBracket?.started == true{
-            //Do nothing if the current Bracket is already started - user cannot change
-            errorLabel.text = "Bracket already started"
+            var stationsViewController: UIViewController!
+            stationsViewController = storyboard!.instantiateViewControllerWithIdentifier("StationsViewController") as! StationsViewController
+            stationsViewController = UINavigationController(rootViewController: stationsViewController)
+            self.slideMenuController()?.changeMainViewController(stationsViewController, close: true)
         }
         else {
             var participantViewController: UIViewController!
@@ -134,22 +134,26 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
+    //start or reset bracket
     @IBAction func startBracket(sender: AnyObject) {
         if currentBracket!.started == true {
-            //Show the station view
+            //RESET BRACKET CODE
         }
-        else if (currentBracket?.numParts != nil && Int((currentBracket?.numParts)!) > 1){
+        else if (currentBracket?.numParts != nil && Int((currentBracket?.numParts)!) >= 3){
             //Start bracket
             //Code filled in later
             
             currentBracket?.started = true
+            currentBracket?.active = 1
             
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let managedContext = appDelegate.managedObjectContext
             
             do {
                 try managedContext.save()
-                startBut.setTitle("Stations List", forState: .Normal)
+                startBut.setTitle("Reset Stations", forState: .Normal)
+                let addParticipantButton = UIBarButtonItem(title: "View Stations", style: UIBarButtonItemStyle.Plain, target: self, action: "addParticipantButton")
+                navigationItem.rightBarButtonItem = addParticipantButton
             } catch let error as NSError {
                 print("Could not save \(error)")
             }
@@ -1616,56 +1620,356 @@ class BracketViewController: UIViewController, UITableViewDelegate, UITableViewD
         var p2name: String?
         var p1seed: Int?
         var p2seed: Int?
-        if thisMatch.hasBye == 1{
-            p1name = "TBD"
-            p2name = thisMatch.player2!.name!
-            p2seed = Int(thisMatch.player2!.seed!)
-            return "\(p1name!) vs \(p2seed!): \(p2name!)"
-        }
-        else if thisMatch.hasBye == 2{
-            p2name = "TBD"
-            p1name = thisMatch.player1!.name!
-            p1seed = Int(thisMatch.player1!.seed!)
-            return "\(p1seed!): \(p1name!) vs \(p2name!)"
-        }
-        else if thisMatch.hasBye! == 0{
-            if thisMatch.player1 == nil && thisMatch.player2 == nil {
-                return "TBD vs TBD"
-            }
-            else if thisMatch.player1 != nil && thisMatch.player2 == nil{
-                p2name = "TBD"
-                p1name = thisMatch.player1!.name!
-                p1seed = Int(thisMatch.player1!.seed!)
-                return "\(p1seed!): \(p1name!) vs \(p2name!)"
-            }
-            else if thisMatch.player1 == nil && thisMatch.player2 != nil{
+        if thisMatch.inProgress != 2 {
+            if thisMatch.hasBye == 1{
                 p1name = "TBD"
                 p2name = thisMatch.player2!.name!
                 p2seed = Int(thisMatch.player2!.seed!)
                 return "\(p1name!) vs \(p2seed!): \(p2name!)"
             }
+            else if thisMatch.hasBye == 2{
+                p2name = "TBD"
+                p1name = thisMatch.player1!.name!
+                p1seed = Int(thisMatch.player1!.seed!)
+                return "\(p1seed!): \(p1name!) vs \(p2name!)"
+            }
+            else if thisMatch.hasBye! == 0{
+                if thisMatch.player1 == nil && thisMatch.player2 == nil {
+                    return "TBD vs TBD"
+                }
+                else if thisMatch.player1 != nil && thisMatch.player2 == nil{
+                    p2name = "TBD"
+                    p1name = thisMatch.player1!.name!
+                    p1seed = Int(thisMatch.player1!.seed!)
+                    return "\(p1seed!): \(p1name!) vs \(p2name!)"
+                }
+                else if thisMatch.player1 == nil && thisMatch.player2 != nil{
+                    p1name = "TBD"
+                    p2name = thisMatch.player2!.name!
+                    p2seed = Int(thisMatch.player2!.seed!)
+                    return "\(p1name!) vs \(p2seed!): \(p2name!)"
+                }
+                else{
+                    p1name = thisMatch.player1!.name!
+                    p1seed = Int(thisMatch.player1!.seed!)
+                    p2name = thisMatch.player2!.name!
+                    p2seed = Int(thisMatch.player2!.seed!)
+                    return "\(p1seed!): \(p1name!) vs \(p2seed!): \(p2name!)"
+                }
+            }
             else{
+                return ""
+            }
+        }
+        else{
+            if (thisMatch.playerDQ == 1){
                 p1name = thisMatch.player1!.name!
                 p1seed = Int(thisMatch.player1!.seed!)
                 p2name = thisMatch.player2!.name!
                 p2seed = Int(thisMatch.player2!.seed!)
-                return "\(p1seed!): \(p1name!) vs \(p2seed!): \(p2name!)"
+                return "\(p1seed!): \(p1name!) vs \(p2seed!): \(p2name!) (W: \(p2name!))"
+            }
+            else if (thisMatch.playerDQ == 2){
+                p1name = thisMatch.player1!.name!
+                p1seed = Int(thisMatch.player1!.seed!)
+                p2name = thisMatch.player2!.name!
+                p2seed = Int(thisMatch.player2!.seed!)
+                return "\(p1seed!): \(p1name!) vs \(p2seed!): \(p2name!) (W: \(p1name!))"
+            }
+            else if (Int(thisMatch.score_player1!) > Int(thisMatch.score_player2!)){
+                p1name = thisMatch.player1!.name!
+                p1seed = Int(thisMatch.player1!.seed!)
+                p2name = thisMatch.player2!.name!
+                p2seed = Int(thisMatch.player2!.seed!)
+                return "\(p1seed!): \(p1name!) vs \(p2seed!): \(p2name!) (W: \(p1name!))"
+            }
+            else if (Int(thisMatch.score_player2!) > Int(thisMatch.score_player1!)){
+                p1name = thisMatch.player1!.name!
+                p1seed = Int(thisMatch.player1!.seed!)
+                p2name = thisMatch.player2!.name!
+                p2seed = Int(thisMatch.player2!.seed!)
+                return "\(p1seed!): \(p1name!) vs \(p2seed!): \(p2name!) (W: \(p1name!))"
+            }
+            else {
+                return ""
             }
         }
-        else{
-            return "Error asd"
-        }
-
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        globalMatch = matches[indexPath.row]
+        if(currentBracket?.started == false){
+            errorLabel.text = "Please start the bracket first."
+        }
+        else {
         
-        var matchViewController: UIViewController!
-        
-        matchViewController = storyboard!.instantiateViewControllerWithIdentifier("MatchViewController") as! MatchViewController
-        matchViewController = UINavigationController(rootViewController: matchViewController)
-        self.slideMenuController()?.changeMainViewController(matchViewController, close: true)
+        if currentBracket?.bracketType == 0{
+            //4 Player SE
+            if indexPath.section == 0{
+                globalMatch = wSemiRound[indexPath.row]
+            }
+            if indexPath.section == 1{
+                globalMatch = wFinalRound[indexPath.row]
+            }
+        }
+        else if currentBracket?.bracketType == 1{
+            //4 Player DE
+            if indexPath.section == 0{
+                globalMatch = wSemiRound[indexPath.row]
+            }
+            if indexPath.section == 1{
+                globalMatch = wFinalRound[indexPath.row]
+            }
+            if indexPath.section == 2{
+                globalMatch = lSemiRound[indexPath.row]
+            }
+            if indexPath.section == 3 {
+                globalMatch = lFinalRound[indexPath.row]
+            }
+            if indexPath.section == 4{
+                globalMatch = grandFinalsRound[indexPath.row]
+            }
+        }
+        else if currentBracket?.bracketType == 2{
+            //8 player SE
+            if indexPath.section == 0 {
+                globalMatch = wQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 1{
+                globalMatch = wSemiRound[indexPath.row]
+            }
+            if indexPath.section == 2{
+                globalMatch = wFinalRound[indexPath.row]
+            }
+        }
+        else if currentBracket?.bracketType == 3{
+            //8 Player DE
+            if indexPath.section == 0 {
+                globalMatch = wQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 1 {
+                globalMatch = l7thRound[indexPath.row]
+            }
+            if indexPath.section == 2 {
+                globalMatch = lQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 3{
+                globalMatch = wSemiRound[indexPath.row]
+            }
+            if indexPath.section == 4{
+                globalMatch = wFinalRound[indexPath.row]
+            }
+            if indexPath.section == 5{
+                globalMatch = lSemiRound[indexPath.row]
+            }
+            if indexPath.section == 6 {
+                globalMatch = lFinalRound[indexPath.row]
+            }
+            if indexPath.section == 7{
+                globalMatch = grandFinalsRound[indexPath.row]
+            }
+        }
+        else if currentBracket?.bracketType == 4{
+            //16 player SE
+            if indexPath.section == 0{
+                globalMatch = w3rdRound[indexPath.row]
+            }
+            if indexPath.section == 1 {
+                globalMatch = wQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 2{
+                globalMatch = wSemiRound[indexPath.row]
+            }
+            if indexPath.section == 3{
+                globalMatch = wFinalRound[indexPath.row]
+            }
+            
+        }
+        else if currentBracket?.bracketType == 5{
+            //16 Player DE
+            if indexPath.section == 0{
+                globalMatch = w3rdRound[indexPath.row]
+            }
+            if indexPath.section == 1 {
+                globalMatch = wQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 2{
+                globalMatch = l5thRound[indexPath.row]
+            }
+            if indexPath.section == 3{
+                globalMatch = l6thRound[indexPath.row]
+            }
+            if indexPath.section == 4{
+                globalMatch = wSemiRound[indexPath.row]
+            }
+            if indexPath.section == 5{
+                globalMatch = l7thRound[indexPath.row]
+            }
+            if indexPath.section == 6 {
+                globalMatch = lQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 7{
+                globalMatch = wFinalRound[indexPath.row]
+            }
+            if indexPath.section == 8{
+                globalMatch = lSemiRound[indexPath.row]
+            }
+            if indexPath.section == 9 {
+                globalMatch = lFinalRound[indexPath.row]
+            }
+            if indexPath.section == 10{
+                globalMatch = grandFinalsRound[indexPath.row]
+            }
+        }
+        else if currentBracket?.bracketType == 6{
+            //32 player SE
+            if indexPath.section == 0 {
+                globalMatch = w2ndRound[indexPath.row]
+            }
+            if indexPath.section == 1{
+                globalMatch = w3rdRound[indexPath.row]
+            }
+            if indexPath.section == 2 {
+                globalMatch = wQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 3{
+                globalMatch = wSemiRound[indexPath.row]
+            }
+            if indexPath.section == 4{
+                globalMatch = wFinalRound[indexPath.row]
+            }
+            
+        }
+        else if currentBracket?.bracketType == 7{
+            //32 Player DE
+            if indexPath.section == 0{
+                globalMatch = w2ndRound[indexPath.row]
+            }
+            if indexPath.section == 1{
+                globalMatch = w3rdRound[indexPath.row]
+            }
+            if indexPath.section == 2{
+                globalMatch = l3rdRound[indexPath.row]
+            }
+            if indexPath.section == 3{
+                globalMatch = l4thRound[indexPath.row]
+            }
+            if indexPath.section == 4{
+                globalMatch = wQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 5{
+                globalMatch = l5thRound[indexPath.row]
+            }
+            if indexPath.section == 6{
+                globalMatch = l6thRound[indexPath.row]
+            }
+            if indexPath.section == 7{
+                globalMatch = wSemiRound[indexPath.row]
+            }
+            if indexPath.section == 8{
+                globalMatch = l7thRound[indexPath.row]
+            }
+            if indexPath.section == 9{
+                globalMatch = lQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 10{
+                globalMatch = wFinalRound[indexPath.row]
+            }
+            if indexPath.section == 11{
+                globalMatch = lSemiRound[indexPath.row]
+            }
+            if indexPath.section == 12{
+                globalMatch = lFinalRound[indexPath.row]
+            }
+            if indexPath.section == 13{
+                globalMatch = grandFinalsRound[indexPath.row]
+            }
+        }
+        else if currentBracket?.bracketType == 8{
+            //64 player SE
+            if indexPath.section == 0 {
+                globalMatch = w1stRound[indexPath.row]
+            }
+            if indexPath.section == 1 {
+                globalMatch = w2ndRound[indexPath.row]
+            }
+            if indexPath.section == 2{
+                globalMatch = w3rdRound[indexPath.row]
+            }
+            if indexPath.section == 3 {
+                globalMatch = wQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 4{
+                globalMatch = wSemiRound[indexPath.row]
+            }
+            if indexPath.section == 5{
+                globalMatch = wFinalRound[indexPath.row]
+            }
+        }
+        else if currentBracket?.bracketType == 9{
+            //64 player DE
+            if indexPath.section == 0 {
+                globalMatch = w1stRound[indexPath.row]
+            }
+            if indexPath.section == 1 {
+                globalMatch = w2ndRound[indexPath.row]
+            }
+            if indexPath.section == 2 {
+                globalMatch = l1stRound[indexPath.row]
+            }
+            if indexPath.section == 3 {
+                globalMatch = l2ndRound[indexPath.row]
+            }
+            if indexPath.section == 4 {
+                globalMatch = w3rdRound[indexPath.row]
+            }
+            if indexPath.section == 5 {
+                globalMatch = l3rdRound[indexPath.row]
+            }
+            if indexPath.section == 6 {
+                globalMatch = l4thRound[indexPath.row]
+            }
+            if indexPath.section == 7 {
+                globalMatch = wQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 8 {
+                globalMatch = l5thRound[indexPath.row]
+            }
+            if indexPath.section == 9 {
+                globalMatch = l6thRound[indexPath.row]
+            }
+            if indexPath.section == 10 {
+                globalMatch = wSemiRound[indexPath.row]
+            }
+            if indexPath.section == 11 {
+                globalMatch = l7thRound[indexPath.row]
+            }
+            if indexPath.section == 12 {
+                globalMatch = lQuarterRound[indexPath.row]
+            }
+            if indexPath.section == 13 {
+                globalMatch = wFinalRound[indexPath.row]
+            }
+            if indexPath.section == 14 {
+                globalMatch = lSemiRound[indexPath.row]
+            }
+            if indexPath.section == 15 {
+                globalMatch = lFinalRound[indexPath.row]
+            }
+            if indexPath.section == 16 {
+                globalMatch = grandFinalsRound[indexPath.row]
+            }
+        }
+        if globalMatch?.player1 != nil && globalMatch?.player2 != nil{
+            var matchViewController: UIViewController!
+            
+            matchViewController = storyboard!.instantiateViewControllerWithIdentifier("MatchViewController") as! MatchViewController
+            matchViewController = UINavigationController(rootViewController: matchViewController)
+            self.slideMenuController()?.changeMainViewController(matchViewController, close: true)
+        }
+        else {
+            errorLabel.text = "Match is not active."
+        }
+        }
     }
     
     /*
